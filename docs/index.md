@@ -6,7 +6,7 @@ nav_order: 0
 
 # Gastro Entdeckung
 
-Gastro entdeckung besser als Goolgle 
+Wiederholungsprüfung in Entwicklung von Web-Anwendungen bei Herrn Prof. Dr. Alexander Eck
 
 
 
