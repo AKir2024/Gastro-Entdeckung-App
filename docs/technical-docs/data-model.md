@@ -9,4 +9,13 @@ nav_order: 3
 
 # Data Model
 
+<details open markdown="block">
+{: .text-delta }
+<summary>Table of contents</summary>
++ ToC
+{: toc }
+</details>
+
+[Visualize and describe the data model(s) of your application. This description should match the actual implementation.]
+
 
