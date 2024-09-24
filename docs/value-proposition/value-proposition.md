@@ -30,6 +30,9 @@ Regelmäßige Gäste, die spezielle Präferenzen beim Essen oder Trinken haben (
 Die Nutzer/innen sparen Zeit und haben eine bessere Erfahrung, da sie genau die Orte finden, die ihren Anforderungen entsprechen. Zudem können sie ihre eigenen Tipps mit der Community teilen.
 
 ## Ablaufdiagramm
+Build on https://lucid.app:
+
+<img width="227" alt="image" src="https://github.com/user-attachments/assets/ac22e5c1-2b29-45ba-b239-49d289e6db24">
 
 ## Web-Sketch
 Build on https://www.figma.com and https://balsamiq.cloud:
