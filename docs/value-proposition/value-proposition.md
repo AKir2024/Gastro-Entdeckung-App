@@ -30,3 +30,5 @@ Regelmäßige Gäste, die spezielle Präferenzen beim Essen oder Trinken haben (
 Die Nutzer/innen sparen Zeit und haben eine bessere Erfahrung, da sie genau die Orte finden, die ihren Anforderungen entsprechen. Zudem können sie ihre eigenen Tipps mit der Community teilen.
 
 ## Ablaufdiagramm
+
+## Web-Sketch
