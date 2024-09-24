@@ -32,3 +32,16 @@ Die Nutzer/innen sparen Zeit und haben eine bessere Erfahrung, da sie genau die 
 ## Ablaufdiagramm
 
 ## Web-Sketch
+Build on https://www.figma.com and https://balsamiq.cloud:
+
+<img width="595" alt="image" src="https://github.com/user-attachments/assets/2c9c93dd-511a-4b0c-9879-bbcb9406f540">
+<img width="596" alt="image" src="https://github.com/user-attachments/assets/e20e3dfd-9dfb-4145-b5af-c3b8eef05c34">
+<img width="596" alt="image" src="https://github.com/user-attachments/assets/9cb85c03-e8fe-4aa4-b0c7-350cfd492227">
+<img width="596" alt="image" src="https://github.com/user-attachments/assets/29ead4f1-09d2-436b-be90-70f778a084ce">
+<img width="595" alt="image" src="https://github.com/user-attachments/assets/c4d86f77-746c-4de4-a40f-a143f6211b8f">
+<img width="594" alt="image" src="https://github.com/user-attachments/assets/e5b2b9aa-71e2-494e-9a9b-85de9f5220e8">
+
+
+
+
+
