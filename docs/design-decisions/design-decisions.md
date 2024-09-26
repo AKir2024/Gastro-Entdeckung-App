@@ -16,7 +16,7 @@ Alexey Kirchner
 {: toc }
 </details>
 
-## 01: [Gastro-Entdeckung: Design Decisions]
+## Gastro-Entdeckung: Design Decisions
 
 --------------------------------------------------------------------------------------------------------------------
 ## Problem statement
