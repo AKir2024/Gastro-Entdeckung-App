@@ -10,6 +10,13 @@ nav_order: 1
 {: .no_toc }
 # Personal Goals 
 
+<details open markdown="block">
+{: .text-delta }
+<summary>Table of contents</summary>
++ ToC
+{: toc }
+</details>
+
 Im Rahmen des Projekts "Gastro-Entdeckung" möchte ich mehrere technische und persönliche Ziele erreichen, um meine Fähigkeiten in der Webentwicklung zu Verbessern.
 
 ### 1. Technische Kompetenzen erweitern:
@@ -23,9 +30,4 @@ Neben den technischen Zielen möchte ich auch meine Fähigkeiten im Bereich des 
 
 ## Zusammengefasst : 
 Mein Hauptziel ist es im Rahmen des Projekts meine Skills im Bereich der Web-Entwicklung weiterzuentwickeln.
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
+---
