@@ -8,7 +8,7 @@ nav_order: 2
 [Alexey Kirchner]
 
 {: .no_toc }
-# How we would improve next time
+# How to improve next time
 
 <details open markdown="block">
 {: .text-delta }
