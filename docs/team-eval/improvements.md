@@ -5,7 +5,7 @@ nav_order: 2
 ---
 
 {: .label }
-[Alexey Kirchner]
+Alexey Kirchner
 
 {: .no_toc }
 # How to improve next time
