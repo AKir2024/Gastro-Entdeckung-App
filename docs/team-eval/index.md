@@ -3,7 +3,8 @@ title: Evaluation
 has_children: true
 nav_order: 5
 ---
+{: .label } Alexey Kirchner
 
-{: .label }
+{: .no_toc }
 
 # Evaluation
