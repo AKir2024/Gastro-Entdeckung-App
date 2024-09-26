@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 {: .label }
-[Alexey Kirchner]
+Alexey Kirchner
 
 {: .no_toc }
 # Goals achieved and missed
