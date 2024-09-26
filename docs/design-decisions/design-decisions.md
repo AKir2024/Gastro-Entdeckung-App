@@ -81,51 +81,34 @@ Bootstrap wurde gewählt, um eine schnelle und einfache Entwicklung einer anspre
 #### Entscheidung:
 Es wurde entschieden, eine benutzerfreundliche Authentifizierungsmethode mit Hilfe von Flask und SQLite zu implementieren. Die Benutzerdaten werden in der SQLite-Datenbank gespeichert.
 
-#### Pros:
+| **Pros**                                                                                             | **Cons**                                                                                                                 |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| +Einfache Implementierung: Flask bietet einfache Methoden zur Authentifizierung und Verwaltung von Benutzer-Sessions, was die Entwicklung vereinfacht. | -Begrenzte Skalierbarkeit von SQLite: Für eine sehr große Anwendung ist SQLite möglicherweise nicht ausreichend, da es keine gleichzeitigen Schreibzugriffe in großem Umfang unterstützt. |
+| +Geringe Komplexität: SQLite erfordert keine komplexe Server-Konfiguration und kann lokal oder auf kleinen Servern betrieben werden. |                                                                                                                          |
 
-Einfache Implementierung: Flask bietet einfache Methoden zur Authentifizierung und zur Verwaltung von Benutzer-Sessions, was die Entwicklung vereinfacht.
-
-Geringe Komplexität: SQLite erfordert keine komplexe Server-Konfiguration und kann lokal oder auf kleinen Servern betrieben werden.
-
-#### Cons:
-
-Begrenzte Skalierbarkeit von SQLite: Für eine sehr große Anwendung ist SQLite möglicherweise nicht ausreichend, da es keine gleichzeitigen Schreibzugriffe in großem Umfang unterstützt.
 
 ### Design Decision 2: Datenbankstruktur
 
 #### Entscheidung:
 Die Datenbankstruktur wird in SQLite entworfen und umfasst die Tabellen: Benutzer, Restaurants, Bewertungen und Favoriten.
 
-#### Pros:
-
-Einfache Implementierung: SQLite ist leicht zu integrieren und erfordert keine komplexe Server-Infrastruktur.
-
-Schnelle Abfragen: SQLite eignet sich gut für kleinere bis mittelgroße Datenmengen, was für die anfängliche Größe des Projekts ideal ist.
-
-Zukunftssicherheit: Die Datenbankstruktur kann mit wachsenden Anforderungen erweitert werden, z.B. durch das Hinzufügen weiterer Filteroptionen oder Bewertungen.
-
-Leicht erweiterbar: Die Trennung der Daten in verschiedene Tabellen erleichtert das Hinzufügen neuer Funktionen wie zusätzliche Filter oder Benutzerfavoriten.
-
-#### Cons:
-
-Keine fortgeschrittenen Features: SQLite bietet nicht die erweiterten Funktionen von Datenbanken wie z.B. erweiterte Abfragen oder integrierte Sicherheitsmechanismen.
+| **Pros**                                                                                                         | **Cons**                                                                                                                |
+|------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| + Einfache Implementierung: SQLite ist leicht zu integrieren und erfordert keine komplexe Server-Infrastruktur.   | - Keine fortgeschrittenen Features: SQLite bietet nicht die erweiterten Funktionen von Datenbanken wie z.B. erweiterte Abfragen oder integrierte Sicherheitsmechanismen. |
+| + Schnelle Abfragen: SQLite eignet sich gut für kleinere bis mittelgroße Datenmengen, was für die anfängliche Größe des Projekts ideal ist. |                                                                                                                         |
+| + Zukunftssicherheit: Die Datenbankstruktur kann mit wachsenden Anforderungen erweitert werden, z.B. durch das Hinzufügen weiterer Filteroptionen oder Bewertungen. |                                                                                                                         |
+| + Leicht erweiterbar: Die Trennung der Daten in verschiedene Tabellen erleichtert das Hinzufügen neuer Funktionen wie zusätzliche Filter oder Benutzerfavoriten. |                                                                                                                         |
 
 ### Design Decision 3: Frontend-Technologie
 
 #### Entscheidung:
 Das Frontend wird mit Bootstrap, HTML, CSS und Jinja entwickelt. Bootstrap wird für das benutzerfreundliche Design genutzt, Jinja für die dynamische Generierung von HTML-Inhalten in Flask.
 
-#### Pros:
-
-Schnelle Entwicklung: Bootstrap bietet vorgefertigte Komponenten, die die Frontend-Entwicklung erheblich beschleunigen.
-
-Leichte Integration mit Flask: Jinja arbeitet nahtlos mit Flask zusammen und ermöglicht die dynamische Generierung von HTML-Inhalten, was die Verbindung von Frontend und Backend vereinfacht.
-
-Geringer Wartungsaufwand: Bootstrap und Jinja sind weit verbreitet und gut dokumentiert, was zukünftige Änderungen erleichtert.
-
-#### Cons:
-
-Ähnliche Design Merkmale: Bootstrap kann, bei geringfügigier Anpassung, dazu führen, dass das Design der Website dem vieler anderer Bootstrap-basierter Seiten ähnelt.
+| **Pros**                                                                                                          | **Cons**                                                                                                                 |
+|-------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| + Schnelle Entwicklung: Bootstrap bietet vorgefertigte Komponenten, die die Frontend-Entwicklung erheblich beschleunigen. | - Ähnliche Design Merkmale: Bootstrap kann, bei geringfügiger Anpassung, dazu führen, dass das Design der Website dem vieler anderer Bootstrap-basierter Seiten ähnelt. |
+| + Leichte Integration mit Flask: Jinja arbeitet nahtlos mit Flask zusammen und ermöglicht die dynamische Generierung von HTML-Inhalten, was die Verbindung von Frontend und Backend vereinfacht. |                                                                                                                          |
+| + Geringer Wartungsaufwand: Bootstrap und Jinja sind weit verbreitet und gut dokumentiert, was zukünftige Änderungen erleichtert. |                                                                                                                          |
 
 
 ---
