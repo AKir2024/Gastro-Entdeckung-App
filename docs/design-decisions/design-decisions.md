@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 {: .label }
-[Alexey Kirchner]
+Alexey Kirchner
 
 {: .no_toc }
 # Design decisions
