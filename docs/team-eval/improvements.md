@@ -7,7 +7,7 @@ nav_order: 2
 {: .label }
 
 {: .no_toc }
-# Improvements
+# Personal Improvements
 
 <details open markdown="block">
 {: .text-delta }
