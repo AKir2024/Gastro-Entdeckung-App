@@ -7,7 +7,7 @@ nav_order: 2
 {: .label }
 
 {: .no_toc }
-# How i would improve next time
+# Improvements
 
 <details open markdown="block">
 {: .text-delta }
