@@ -49,9 +49,29 @@ Die Datenbank muss gut genug sein, um zukünftige Erweiterungen zu unterstützen
 Das Ziel ist es, geeignete Methoden für die Entwicklung der Benutzeroberfläche der Webanwendung auszuwählen. Die Herausforderung besteht darin, eine einfache und benutzerfreundliche Oberfläche zu erstellen. Es geht darum, sicherzustellen, dass die Website leicht zu bedienen ist und optisch ansprechend wirkt. Dies umfasst die Auswahl von Tools und Technologien, die die Entwicklung erleichtern und eine einfache Aktualisierung und Wartung der Website ermöglichen. Letztendlich soll sichergestellt werden, dass die Nutzer eine positive Erfahrung beim Besuch der Website haben und die Frontend-Entwicklung reibungslos verläuft.
 
 
-### Decision
+## Decision
 
-[Describe **which** design decision was taken for **what reason** and by **whom**.]
+### Design Decision 1: Auswahl der Anmeldemethode
+#### Entscheidung:
+Es wurde entschieden, eine benutzerfreundliche Anmeldemethode mit Hilfe von Flask und SQLite zu implementieren. Die Benutzerdaten werden sicher in der SQLite-Datenbank gespeichert. 
+
+#### Begründung:
+Flask ermöglicht eine einfache Integration der Anmeldemodule und ist leicht skalierbar, um eine wachsende Anzahl von Registrierungen zu unterstützen. SQLite wurde aufgrund seiner Einfachheit und der geringen administrativen Anforderungen gewählt. Für eine wachsende Nutzerbasis ist die Implementierung flexibel, zudem bietet Flask Erweiterungsmöglichkeiten, falls zukünftige Anforderungen dies verlangen.
+
+### Design Decision 2: Datenbank
+#### Entscheidung:
+Die Datenbankstruktur wird in SQLite entworfen und umfasst die folgenden Tabellen: Benutzer, Restaurants, Bewertungen und Favoriten.
+
+#### Begründung:
+SQLite wurde aufgrund einer Empfehlung im Kurs gewählt, da es keine separate Server-Konfiguration erfordert. Die Struktur der Tabellen unterstützt eine Abfrage von Restaurants basierend auf verschiedenen Filterkriterien (wie Küche, Preis und Essgewohnheiten) und ermöglicht es Benutzern, ihre favorisierten Restaurants einfach zu speichern. 
+
+### Design Decision 3: Frontend
+
+#### Entscheidung:
+Es wurde entschieden, das Frontend mit Bootstrap, HTML, CSS und Jinja zu entwickeln, um eine benutzerfreundliche Oberfläche zu schaffen. Jinja wird verwendet, um dynamische HTML-Inhalte in Flask zu rendern, wodurch die Verbindung zwischen Backend und Frontend vereinfacht wird.
+
+#### Begründung:
+Bootstrap wurde gewählt, um eine schnelle und einfache Entwicklung einer ansprechenden und funktionalen Benutzeroberfläche zu gewährleisten. Es bietet vorgefertigte Designkomponenten, die sicherstellen, dass die Anwendung einwandfrei funktioniert. 
 
 ### Regarded options
 
