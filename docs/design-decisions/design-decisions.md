@@ -110,5 +110,9 @@ Das Frontend wird mit Bootstrap, HTML, CSS und Jinja entwickelt. Bootstrap wird 
 | + Leichte Integration mit Flask: Jinja arbeitet nahtlos mit Flask zusammen und ermöglicht die dynamische Generierung von HTML-Inhalten, was die Verbindung von Frontend und Backend vereinfacht. |                                                                                                                          |
 | + Geringer Wartungsaufwand: Bootstrap und Jinja sind weit verbreitet und gut dokumentiert, was zukünftige Änderungen erleichtert. |                                                                                                                          |
 
+## Zusammenfassung:
+Für das "Gastro-Entdeckung"-Projekt werden folgende Design-Descisions getroffen, um eine benutzerfreundliche Anwendung zu schaffen. Flask wurde als Backend-Framework in Kombination mit SQLite gewählt, da diese eine einfache Implementierung und eine übersichtiliche Speicherung der Benutzerdaten bieten. SQLite ist dabei optimal für kleinere bis mittlere Datenmengen.
+
+Im Frontend wird Bootstrap eingesetzt, um die Entwicklung durch vorgefertigte und responsive Komponenten zu beschleunigen. Jinja sorgt für eine Integration von dynamischen Inhalten in Flask, was die Verbindung von Backend und Frontend gewährt. Diese Kombination bietet eine schnelle- und überschauliche Entwicklung der Anwendung. Insgesamt ermöglichen diese Entscheidungen die Entwicklung einer benutzerfreundlichen und Funktionalen Web-App.
 
 ---
