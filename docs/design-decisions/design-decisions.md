@@ -18,8 +18,36 @@ Alexey Kirchner
 
 ## 01: [Gastro-Entdeckung: Design Decisions]
 
-### Problem statement
+## Problem statement
 Die Benutzer von der Gastro-Entdeckungs-WebApp sollen in der Lage sein, Restaurants in ihrer Nähe zu finden und verschiedene Filteroptionen wie Küche, Preis oder Essgewohnheit zu verwenden, um die Auswahl einzugrenzen. Es wird eine benutzerfreundliche Webanwendung benötigt, von jedem intuitiv bedient werden kann. Die Anwendung soll zudem eine interaktive Karte zur Visualisierung der Restaurants enthalten. Um dies zu erreichen, müssen mehrere Seiten (Startseite, Login, Registrierung, Karte, Suchfilter, und Listenausgabe) entworfen und ihre Funktionalität klar definiert werden.
+
+
+### Problem Statement 1: Auswahl einer geeigneten Anmeldemethode:
+Das Ziel ist es, eine benutzerfreundliche Methode zur Authentifizierung von Nutzern zu implementieren, die es ermöglicht, sich zu registrieren und einzuloggen, um Zugang zur App und ihren Funktionen wie der Restaurant-Suche, der Kartenansicht und den Filterfunktionen zu erhalten.
+
+#### Benutzerfreundlichkeit: 
+Die Methode sollte einfach und intuitiv sein, um eine breite Nutzerschaft zu erreichen und den Registrierungs- und Login-Prozess so reibungslos wie möglich zu gestalten.
+
+#### Skalierbarkeit: 
+Die gewählte Lösung sollte in der Lage sein, ohne probleme mit einer wachsenden Anzahl von Registrierungen zurecht zu kommen.
+
+### Problem Statement 2: Datenbank
+Das Ziel ist es, eine Datenbankstruktur für die Anwendung zu entwerfen, die eine effiziente Verwaltung von Nutzerdaten, Restaurants und Bewertungen ermöglicht. Die Datenbankstruktur sollte die folgenden Hauptentitäten und ihre Beziehungen abbilden:
+
+#### Benutzerkonten: 
+Speichern von Benutzerinformationen wie Name, Passwort, etc.
+
+#### Restaurants:
+Verwaltung von Restaurantdaten, einschließlich Name, Adresse, Küche und Bewertungen.
+
+#### Favoriten: 
+Speicherung von favorisierten Restaurants.
+
+Die Datenbank muss gut genug sein, um zukünftige Erweiterungen zu unterstützen, z.B. das Hinzufügen von neuen Nutzern oder Favoritenlisten. Außerdem sollte sie eine effiziente Abfrage und Änderung der Daten ermöglichen, die auch bei wachsenden Datenmengen und einer steigenden Nutzeranzahl ohne Probleme funktioniert.
+
+### Problem Statement 3: Frontend
+Das Ziel ist es, geeignete Methoden für die Entwicklung der Benutzeroberfläche der Webanwendung auszuwählen. Die Herausforderung besteht darin, eine einfache und benutzerfreundliche Oberfläche zu erstellen. Es geht darum, sicherzustellen, dass die Website leicht zu bedienen ist und optisch ansprechend wirkt. Dies umfasst die Auswahl von Tools und Technologien, die die Entwicklung erleichtern und eine einfache Aktualisierung und Wartung der Website ermöglichen. Letztendlich soll sichergestellt werden, dass die Nutzer eine positive Erfahrung beim Besuch der Website haben und die Frontend-Entwicklung reibungslos verläuft.
+
 
 ### Decision
 
