@@ -30,4 +30,3 @@ Neben den technischen Zielen möchte ich auch meine Fähigkeiten im Bereich des 
 
 ## Zusammengefasst : 
 Mein Hauptziel ist es im Rahmen des Projekts meine Skills im Bereich der Web-Entwicklung weiterzuentwickeln.
----
