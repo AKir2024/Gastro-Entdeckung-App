@@ -1,11 +1,11 @@
 ---
 title: Improvements
-parent: Team Evaluation
+parent: Evaluation
 nav_order: 2
 ---
 
 {: .label }
-[Jane Dane]
+[Alexey Kirchner]
 
 {: .no_toc }
 # How we would improve next time
