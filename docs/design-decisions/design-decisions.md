@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 {: .label }
-[Jane Dane]
+[Alexey Kirchner]
 
 {: .no_toc }
 # Design decisions
@@ -16,7 +16,7 @@ nav_order: 3
 {: toc }
 </details>
 
-## 01: [Title]
+## 01: [Gastro-Entdeckung: Design Decisions]
 
 ### Problem statement
 Die Benutzer von der Gastro-Entdeckungs-WebApp sollen in der Lage sein, Restaurants in ihrer Nähe zu finden und verschiedene Filteroptionen wie Küche, Preis oder Essgewohnheit zu verwenden, um die Auswahl einzugrenzen. Es wird eine benutzerfreundliche Webanwendung benötigt, von jedem intuitiv bedient werden kann. Die Anwendung soll zudem eine interaktive Karte zur Visualisierung der Restaurants enthalten. Um dies zu erreichen, müssen mehrere Seiten (Startseite, Login, Registrierung, Karte, Suchfilter, und Listenausgabe) entworfen und ihre Funktionalität klar definiert werden.
