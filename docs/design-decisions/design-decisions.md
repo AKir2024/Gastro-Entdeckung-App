@@ -83,7 +83,7 @@ Es wurde entschieden, eine benutzerfreundliche Authentifizierungsmethode mit Hil
 
 | **Pros**                                                                                             | **Cons**                                                                                                                 |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| +Einfache Implementierung: Flask bietet einfache Methoden zur Authentifizierung und Verwaltung von Benutzer-Sessions, was die Entwicklung vereinfacht. | -Begrenzte Skalierbarkeit von SQLite: Für eine sehr große Anwendung ist SQLite möglicherweise nicht ausreichend, da es keine gleichzeitigen Schreibzugriffe in großem Umfang unterstützt. |
+| +Einfache Implementierung: Flask bietet einfache Methoden zur Anmeldung und Verwaltung von User-Sessions, was die Entwicklung vereinfacht. | -Begrenzte Skalierbarkeit von SQLite: Für eine sehr große Anwendung ist SQLite möglicherweise nicht ausreichend, da es keine gleichzeitigen Schreibzugriffe in großem Umfang unterstützt. |
 | +Geringe Komplexität: SQLite erfordert keine komplexe Server-Konfiguration und kann lokal oder auf kleinen Servern betrieben werden. |                                                                                                                          |
 
 
