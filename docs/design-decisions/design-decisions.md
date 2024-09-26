@@ -18,6 +18,7 @@ Alexey Kirchner
 
 ## 01: [Gastro-Entdeckung: Design Decisions]
 
+--------------------------------------------------------------------------------------------------------------------
 ## Problem statement
 Die Benutzer von der Gastro-Entdeckungs-WebApp sollen in der Lage sein, Restaurants in ihrer Nähe zu finden und verschiedene Filteroptionen wie Küche, Preis oder Essgewohnheit zu verwenden, um die Auswahl einzugrenzen. Es wird eine benutzerfreundliche Webanwendung benötigt, von jedem intuitiv bedient werden kann. Die Anwendung soll zudem eine interaktive Karte zur Visualisierung der Restaurants enthalten. Um dies zu erreichen, müssen mehrere Seiten (Startseite, Login, Registrierung, Karte, Suchfilter, und Listenausgabe) entworfen und ihre Funktionalität klar definiert werden.
 
@@ -48,7 +49,7 @@ Die Datenbank muss gut genug sein, um zukünftige Erweiterungen zu unterstützen
 ### Problem Statement 3: Frontend
 Das Ziel ist es, geeignete Methoden für die Entwicklung der Benutzeroberfläche der Webanwendung auszuwählen. Die Herausforderung besteht darin, eine einfache und benutzerfreundliche Oberfläche zu erstellen. Es geht darum, sicherzustellen, dass die Website leicht zu bedienen ist und optisch ansprechend wirkt. Dies umfasst die Auswahl von Tools und Technologien, die die Entwicklung erleichtern und eine einfache Aktualisierung und Wartung der Website ermöglichen. Letztendlich soll sichergestellt werden, dass die Nutzer eine positive Erfahrung beim Besuch der Website haben und die Frontend-Entwicklung reibungslos verläuft.
 
-
+--------------------------------------------------------------------------------------------------------------------
 ## Decision
 
 ### Design Decision 1: Auswahl der Anmeldemethode
@@ -73,10 +74,11 @@ Es wurde entschieden, das Frontend mit Bootstrap, HTML, CSS und Jinja zu entwick
 #### Begründung:
 Bootstrap wurde gewählt, um eine schnelle und einfache Entwicklung einer ansprechenden und funktionalen Benutzeroberfläche zu gewährleisten. Es bietet vorgefertigte Designkomponenten, die sicherstellen, dass die Anwendung einwandfrei funktioniert. 
 
+--------------------------------------------------------------------------------------------------------------------
 ## Regarded options
 
 ### Design Decision 1: Auswahl der Anmeldemethode
-## Entscheidung:
+#### Entscheidung:
 Es wurde entschieden, eine benutzerfreundliche Authentifizierungsmethode mit Hilfe von Flask und SQLite zu implementieren. Die Benutzerdaten werden in der SQLite-Datenbank gespeichert.
 
 #### Pros:
