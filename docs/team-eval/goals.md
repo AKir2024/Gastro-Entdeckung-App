@@ -8,7 +8,7 @@ nav_order: 1
 
 
 {: .no_toc }
-# Goals achieved and missed
+# Personal Goals 
 
 <details open markdown="block">
 {: .text-delta }
