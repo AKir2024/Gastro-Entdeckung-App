@@ -7,9 +7,8 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
 
-
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SECRET_KEY'] = 'your_secret_key_here'  # Ersetze das durch deinen eigenen geheimen Schlüssel
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -21,6 +20,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+
+# Datenbankmodell für Gastro-Tipps
+class Tip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tip_content = db.Column(db.String(500), nullable=False)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,10 +43,21 @@ class LoginForm(FlaskForm):
     password = PasswordField('Passwort', validators=[DataRequired()])
     submit = SubmitField('Einloggen')
 
+# Formular für die Suche nach Gastro-Tipps
+class SearchForm(FlaskForm):
+    search_query = StringField('Suchbegriff', validators=[DataRequired()])
+    submit = SubmitField('Suchen')
+
+# Formular für das Hinzufügen von Gastro-Tipps
+class TipForm(FlaskForm):
+    tip_content = StringField('Gastro-Tipp', validators=[DataRequired(), Length(min=10, max=500)])
+    submit = SubmitField('Tipp hinzufügen')
+
 # Route für die Startseite
 @app.route('/')
 def index():
-    return render_template('index.html')
+    tips = Tip.query.all()  # Alle Tipps aus der Datenbank abrufen
+    return render_template('index.html', tips=tips)
 
 # Route für die Registrierung
 @app.route('/register', methods=['GET', 'POST'])
@@ -66,7 +81,6 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Du bist jetzt eingeloggt!', 'success')
-            print("Du bist eingeloggt")
             return redirect(url_for('index'))
         else:
             flash('Login fehlgeschlagen. Bitte überprüfe Email und Passwort.', 'danger')
@@ -79,6 +93,29 @@ def logout():
     logout_user()
     flash('Du bist jetzt ausgeloggt!', 'success')
     return redirect(url_for('index'))
+
+# Route für die Seite zum Hinzufügen eines Gastro-Tipps
+@app.route('/add_tip', methods=['GET', 'POST'])
+@login_required
+def add_tip():
+    form = TipForm()
+    if form.validate_on_submit():
+        new_tip = Tip(tip_content=form.tip_content.data)
+        db.session.add(new_tip)
+        db.session.commit()
+        flash('Dein Tipp wurde hinzugefügt!', 'success')
+        return redirect(url_for('index'))
+    return render_template('add_tip.html', form=form)
+
+# Route für die Suche nach Gastro-Tipps
+@app.route('/search_tip', methods=['GET', 'POST'])
+def search_tip():
+    form = SearchForm()
+    search_results = []
+    if form.validate_on_submit():
+        search_query = form.search_query.data
+        search_results = Tip.query.filter(Tip.tip_content.like(f'%{search_query}%')).all()
+    return render_template('search_tip.html', form=form, search_results=search_results)
 
 # Datenbanktabellen beim ersten Start erstellen
 @app.before_request

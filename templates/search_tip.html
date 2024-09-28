@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gastro-Tipps suchen</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Suche nach Gastro-Tipps</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.search_query.label }}<br>
+                {{ form.search_query }}
+            </div>
+            <div>
+                {{ form.submit }}
+            </div>
+        </form>
+
+        <h2>Suchergebnisse</h2>
+        <ul>
+            {% for tip in search_results %}
+                <li>{{ tip.tip_content }}</li>
+            {% else %}
+                <p>Keine Ergebnisse gefunden.</p>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+    </div>
+</body>
+</html>
