@@ -2,8 +2,10 @@
 <html>
 <head>
     <title>Registrieren</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
     <h1>Registriere dich</h1>
     <form method="POST">
         {{ form.hidden_tag() }}
@@ -24,5 +26,6 @@
         </div>
     </form>
     <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+</div>
 </body>
 </html>

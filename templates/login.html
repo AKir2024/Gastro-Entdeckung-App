@@ -2,23 +2,26 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Einloggen</h1>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.email.label }}<br>
-            {{ form.email }}
-        </div>
-        <div>
-            {{ form.password.label }}<br>
-            {{ form.password }}
-        </div>
-        <div>
-            {{ form.submit }}
-        </div>
-    </form>
-    <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.email.label }}<br>
+                {{ form.email }}
+            </div>
+            <div>
+                {{ form.password.label }}<br>
+                {{ form.password }}
+            </div>
+            <div>
+                {{ form.submit }}
+            </div>
+        </form>
+        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
+    </div>
 </body>
 </html>
