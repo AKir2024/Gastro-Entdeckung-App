@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Startseite</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Willkommen zu Gastro-Entdeckungen</h1>
-        {% if current_user.is_authenticated %}
-            <p>Hallo, {{ current_user.email }}!</p>
-            <a href="{{ url_for('logout') }}">Logout</a>
-            <a href="{{ url_for('add_tip') }}">Gastro-Tipp hinzufügen</a>
+{% extends "base.html" %}
+
+{% block title %}Home - Restaurant Tips{% endblock %}
+
+{% block content %}
+    <h2>Latest Restaurant Tips</h2>
+    {% if current_user.is_authenticated %}
+        <p>Welcome back, {{ current_user.email }}!</p>
+    {% endif %}
+    <section class="tips">
+        {% for tip in tips %}
+            <article class="tip">
+                <h3><a href="{{ url_for('restaurant', id=tip.id) }}">{{ tip.name }}</a></h3>
+                <p><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
+                <p><strong>Price Range:</strong> {{ tip.price_range }}</p>
+                <p><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
+                <p>{{ tip.tip_content[:100] }}{% if tip.tip_content|length > 100 %}...{% endif %}</p>
+                <a href="{{ url_for('restaurant', id=tip.id) }}">Read more</a>
+            </article>
         {% else %}
-            <a href="{{ url_for('login') }}">Login</a> oder
-            <a href="{{ url_for('register') }}">Registrieren</a>
-        {% endif %}
-
-        <h2>Gastro-Tipps</h2>
-        <ul>
-            {% for tip in tips %}
-                <li>{{ tip.tip_content }}</li>
-            {% else %}
-                <p>Keine Tipps gefunden.</p>
-            {% endfor %}
-        </ul>
-
-        <a href="{{ url_for('search_tip') }}">Suche nach Tipps</a>
-    </div>
-</body>
-</html>
+            <p>No tips available yet. Be the first to add one!</p>
+        {% endfor %}
+    </section>
+{% endblock %}

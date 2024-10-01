@@ -1,101 +1,186 @@
-/* Allgemeines Layout */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4;
 }
 
-/* Container für den Inhalt */
 .container {
-    background-color: #fff;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    text-align: center;
 }
 
-/* Navigation */
-nav {
-    margin-bottom: 20px;
-}
-
-nav a {
-    text-decoration: none;
+/* Header Styles */
+header {
+    background: #333;
     color: #fff;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 0 10px;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #bbb 1px solid;
 }
 
-nav a:hover {
-    background-color: #0056b3;
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
 }
 
-/* Überschriften */
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
 }
 
-/* Formulare */
-form {
-    display: flex;
-    flex-direction: column;
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
 }
 
-form div {
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
+}
+
+header .highlight, header .current a {
+    color: #e8491d;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px 0;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Form Styles */
+.form-group {
     margin-bottom: 15px;
 }
 
-form input[type="text"],
-form input[type="password"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
 }
 
-form input[type="submit"] {
-    background-color: #28a745;
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group input[type="submit"] {
+    display: inline-block;
+    background: #333;
     color: #fff;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-form input[type="submit"]:hover {
-    background-color: #218838;
+.form-group input[type="submit"]:hover {
+    background: #e8491d;
 }
 
-/* Tipp-Liste */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    background-color: #f8f9fa;
-    padding: 10px;
-    margin-bottom: 10px;
+/* Tip Styles */
+.tip {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Links */
-a {
-    color: #007bff;
+.tip h3 {
+    margin-top: 0;
+}
+
+.tip a {
+    color: #333;
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
+.tip a:hover {
+    color: #e8491d;
+}
+
+/* Search Results Styles */
+.search-results {
+    margin-top: 30px;
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Flash Message Styles */
+.flash-messages {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Responsive Design */
+@media(max-width: 768px) {
+    header #branding,
+    header nav,
+    header nav li {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    header {
+        padding-bottom: 20px;
+    }
 }

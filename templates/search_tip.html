@@ -1,33 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Gastro-Tipps suchen</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Restaurant Tips</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Suche nach Gastro-Tipps</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <div>
-                {{ form.search_query.label }}<br>
-                {{ form.search_query }}
-            </div>
-            <div>
-                {{ form.submit }}
-            </div>
-        </form>
+    <header>
+        <h1>Search Restaurant Tips</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('add_tip') }}">Add Tip</a></li>
+                    <li><a href="{{ url_for('preferences') }}">Preferences</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
 
-        <h2>Suchergebnisse</h2>
-        <ul>
-            {% for tip in search_results %}
-                <li>{{ tip.tip_content }}</li>
+    <main>
+        <section class="search-form">
+            <h2>Search for Restaurant Tips</h2>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.search_query.label }}
+                    {{ form.search_query }}
+                </div>
+                <div class="form-group">
+                    {{ form.cuisine.label }}
+                    {{ form.cuisine }}
+                </div>
+                <div class="form-group">
+                    {{ form.price_range.label }}
+                    {{ form.price_range }}
+                </div>
+                <div class="form-group">
+                    {{ form.atmosphere.label }}
+                    {{ form.atmosphere }}
+                </div>
+                <div class="form-group">
+                    {{ form.submit }}
+                </div>
+            </form>
+        </section>
+
+        <section class="search-results">
+            <h2>Search Results</h2>
+            {% if search_results %}
+                {% for tip in search_results %}
+                    <article class="tip">
+                        <h3><a href="{{ url_for('restaurant', id=tip.id) }}">{{ tip.name }}</a></h3>
+                        <p><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
+                        <p><strong>Price Range:</strong> {{ tip.price_range }}</p>
+                        <p><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
+                        <p>{{ tip.tip_content[:100] }}{% if tip.tip_content|length > 100 %}...{% endif %}</p>
+                        <a href="{{ url_for('restaurant', id=tip.id) }}">Read more</a>
+                    </article>
+                {% endfor %}
             {% else %}
-                <p>Keine Ergebnisse gefunden.</p>
-            {% endfor %}
-        </ul>
+                <p>No results found. Try adjusting your search criteria.</p>
+            {% endif %}
+        </section>
+    </main>
 
-        <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
-    </div>
+    <footer>
+        <p>&copy; 2023 Restaurant Tips for Regular Visitors. All rights reserved.</p>
+    </footer>
 </body>
 </html>
