@@ -3,6 +3,10 @@ title: Technical Docs
 has_children: true
 nav_order: 3
 ---
+{: .label }
+Alexey Kirchner
+
+{: .no_toc }
 
 # Technical documentation
 
