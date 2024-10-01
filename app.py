@@ -1,65 +1,91 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'  # Ersetze das durch deinen eigenen geheimen Schlüssel
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurant_tips.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-# Datenbankmodell für Benutzer
+# User model
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    preferences = db.relationship('Preference', backref='user', lazy=True)
 
-# Datenbankmodell für Gastro-Tipps
+# Restaurant tip model
 class Tip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    cuisine = db.Column(db.String(50), nullable=False)
+    price_range = db.Column(db.String(20), nullable=False)
+    atmosphere = db.Column(db.String(50), nullable=False)
     tip_content = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+# User preference model
+class Preference(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cuisine = db.Column(db.String(50), nullable=False)
+    price_range = db.Column(db.String(20), nullable=False)
+    atmosphere = db.Column(db.String(50), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Formular für die Registrierung
+# Registration form
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(), Length(min=6, max=150)])
-    password = PasswordField('Passwort', validators=[DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('Passwort bestätigen', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Registrieren')
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
 
-# Formular für den Login
+# Login form
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Passwort', validators=[DataRequired()])
-    submit = SubmitField('Einloggen')
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
 
-# Formular für die Suche nach Gastro-Tipps
+# Search form
 class SearchForm(FlaskForm):
-    search_query = StringField('Suchbegriff', validators=[DataRequired()])
-    submit = SubmitField('Suchen')
+    search_query = StringField('Search Query', validators=[DataRequired()])
+    cuisine = SelectField('Cuisine', choices=[('', 'Any'), ('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
+    price_range = SelectField('Price Range', choices=[('', 'Any'), ('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
+    atmosphere = SelectField('Atmosphere', choices=[('', 'Any'), ('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
+    submit = SubmitField('Search')
 
-# Formular für das Hinzufügen von Gastro-Tipps
+# Tip form
 class TipForm(FlaskForm):
-    tip_content = StringField('Gastro-Tipp', validators=[DataRequired(), Length(min=10, max=500)])
-    submit = SubmitField('Tipp hinzufügen')
+    name = StringField('Restaurant Name', validators=[DataRequired(), Length(max=100)])
+    cuisine = SelectField('Cuisine', choices=[('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
+    price_range = SelectField('Price Range', choices=[('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
+    atmosphere = SelectField('Atmosphere', choices=[('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
+    tip_content = TextAreaField('Your Tip', validators=[DataRequired(), Length(min=10, max=500)])
+    submit = SubmitField('Add Tip')
 
-# Route für die Startseite
+# Preference form
+class PreferenceForm(FlaskForm):
+    cuisine = SelectField('Favorite Cuisine', choices=[('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
+    price_range = SelectField('Preferred Price Range', choices=[('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
+    atmosphere = SelectField('Preferred Atmosphere', choices=[('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
+    submit = SubmitField('Save Preferences')
+
 @app.route('/')
 def index():
-    tips = Tip.query.all()  # Alle Tipps aus der Datenbank abrufen
+    tips = Tip.query.all()
     return render_template('index.html', tips=tips)
 
-# Route für die Registrierung
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -68,11 +94,10 @@ def register():
         user = User(email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Dein Account wurde erstellt. Du kannst dich jetzt einloggen!', 'success')
+        flash('Your account has been created. You can now log in!', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-# Route für den Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -80,48 +105,92 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            flash('Du bist jetzt eingeloggt!', 'success')
+            flash('You are now logged in!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Login fehlgeschlagen. Bitte überprüfe Email und Passwort.', 'danger')
+            flash('Login failed. Please check your email and password.', 'danger')
     return render_template('login.html', form=form)
 
-# Route für das Ausloggen
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('Du bist jetzt ausgeloggt!', 'success')
+    flash('You have been logged out.', 'success')
     return redirect(url_for('index'))
 
-# Route für die Seite zum Hinzufügen eines Gastro-Tipps
 @app.route('/add_tip', methods=['GET', 'POST'])
 @login_required
 def add_tip():
     form = TipForm()
     if form.validate_on_submit():
-        new_tip = Tip(tip_content=form.tip_content.data)
+        new_tip = Tip(
+            name=form.name.data,
+            cuisine=form.cuisine.data,
+            price_range=form.price_range.data,
+            atmosphere=form.atmosphere.data,
+            tip_content=form.tip_content.data,
+            user_id=current_user.id
+        )
         db.session.add(new_tip)
         db.session.commit()
-        flash('Dein Tipp wurde hinzugefügt!', 'success')
+        flash('Your tip has been added!', 'success')
         return redirect(url_for('index'))
     return render_template('add_tip.html', form=form)
 
-# Route für die Suche nach Gastro-Tipps
 @app.route('/search_tip', methods=['GET', 'POST'])
 def search_tip():
     form = SearchForm()
     search_results = []
     if form.validate_on_submit():
-        search_query = form.search_query.data
-        search_results = Tip.query.filter(Tip.tip_content.like(f'%{search_query}%')).all()
+        query = Tip.query
+        if form.search_query.data:
+            query = query.filter(Tip.name.like(f'%{form.search_query.data}%') | Tip.tip_content.like(f'%{form.search_query.data}%'))
+        if form.cuisine.data:
+            query = query.filter(Tip.cuisine == form.cuisine.data)
+        if form.price_range.data:
+            query = query.filter(Tip.price_range == form.price_range.data)
+        if form.atmosphere.data:
+            query = query.filter(Tip.atmosphere == form.atmosphere.data)
+        search_results = query.all()
     return render_template('search_tip.html', form=form, search_results=search_results)
 
-# Datenbanktabellen beim ersten Start erstellen
-@app.before_request
+@app.route('/preferences', methods=['GET', 'POST'])
+@login_required
+def preferences():
+    form = PreferenceForm()
+    user_preference = Preference.query.filter_by(user_id=current_user.id).first()
+    
+    if form.validate_on_submit():
+        if user_preference:
+            user_preference.cuisine = form.cuisine.data
+            user_preference.price_range = form.price_range.data
+            user_preference.atmosphere = form.atmosphere.data
+        else:
+            new_preference = Preference(
+                cuisine=form.cuisine.data,
+                price_range=form.price_range.data,
+                atmosphere=form.atmosphere.data,
+                user_id=current_user.id
+            )
+            db.session.add(new_preference)
+        db.session.commit()
+        flash('Your preferences have been updated!', 'success')
+        return redirect(url_for('index'))
+    elif request.method == 'GET' and user_preference:
+        form.cuisine.data = user_preference.cuisine
+        form.price_range.data = user_preference.price_range
+        form.atmosphere.data = user_preference.atmosphere
+    return render_template('preferences.html', form=form)
+
+@app.route('/restaurant/<int:id>')
+def restaurant(id):
+    tip = Tip.query.get_or_404(id)
+    return render_template('restaurant.html', tip=tip)
+
 def create_tables():
-    if not os.path.exists('users.db'):
+    with app.app_context():
         db.create_all()
 
 if __name__ == '__main__':
+    create_tables()
     app.run(debug=True)
