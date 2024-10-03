@@ -30,7 +30,7 @@ https://www.youtube.com/watch?v=ic9905SMPzk
    
 ## ChatGPT Prompts (https://chatgpt.com):
 - https://chatgpt.com/share/66ff2127-3790-8004-9779-7b5f2e0f7580
-- https://chatgpt.com/share/66ff2127-3790-8004-9779-7b5f2e0f7580
+- https://chatgpt.com/share/66ff2246-80f4-8004-b966-bb7e06fed600
 -->Mehr Antworten im Prompts Ordner
   
 ![image](https://github.com/user-attachments/assets/9960f3a8-b301-428f-9bbc-685d9180ea76)
