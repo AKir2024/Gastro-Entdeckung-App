@@ -23,8 +23,8 @@ This is a Flask-based web application that allows regular restaurant visitors to
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/restaurant-tips.git
-   cd restaurant-tips
+   git clone https://github.com/AKir2024/Gastro-Entdeckung-App
+   cd Gastro-Entdeckung-App
    ```
 
 2. Create a virtual environment and activate it:
@@ -59,10 +59,6 @@ This is a Flask-based web application that allows regular restaurant visitors to
 3. Search for tips using the search form, which allows filtering by cuisine, price range, and atmosphere.
 4. Set your preferences to customize your experience.
 5. View detailed information about each restaurant by clicking on its name in the tip list.
-
-## Contributing
-
-If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
 
 ## License
 
