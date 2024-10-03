@@ -44,6 +44,10 @@ This is a Flask-based web application that allows regular restaurant visitors to
    ```
    pip install flask flask-sqlalchemy flask-wtf flask-bcrypt flask-login
    ```
+4. Install the module requests:
+   ```
+   pip install requests
+   ```
 
 ## Running the Application
 
