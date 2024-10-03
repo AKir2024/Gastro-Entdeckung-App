@@ -1,4 +1,11 @@
-# Restaurant Tips for Regular Visitors
+# Gastro-Entdeckung-App
+Find bars/restaurants that meet your specific needs
+
+by Alexey Kirchner
+
+Course: Development of web applications with Prof. Dr. Alexander Eck
+
+Documentation: https://akir2024.github.io/Gastro-Entdeckung-App/
 
 This is a Flask-based web application that allows regular restaurant visitors to share and search for restaurant tips. The application includes features such as user registration, login, adding tips, searching for tips with specific criteria, and setting user preferences.
 
