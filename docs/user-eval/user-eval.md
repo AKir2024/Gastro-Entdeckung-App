@@ -32,7 +32,7 @@ Ich habe die Schwester als Testperson eingesetzt, diese hat ein neues Konto zu e
 ### Ergebnisse
 Der gesamte Registrierungsprozess dauerte etwa 40 Sekunden. Meine Schwester fand den Vorgang leicht verständlich, mit gut beschrifteten Feldern und klaren Anweisungen. Sie bemerkte jedoch, dass bei Falscher Eingabe keine Meldung erschienen ist. 
 
-### Implikationen
+### Implikation
 Um den Prozess für den Nutzer Verständlicher zu machen könnte die Implementierung einer Meldung bei Falscheingabe helfen.
 
 ## 02: Gastro Tipp abgeben
@@ -50,7 +50,7 @@ Ich habe die Testperson angewiesen, einen Gastro-Tipp abzugeben und zu sehen, wi
 ### Ergebnisse
 Meine Schwester konnte den Tipp erfolgreich abgeben, jedoch dauerte es länger als erwartet, da einige Felder nicht klar beschriftet waren. Daher musste Sie den Prozess kurz unterbrechen, um die Funktion zu verstehen. Sobald sie das System verstanden hatte, konnte sie den Tipp problemlos abgeben.
 
-### Implikationen
+### Implikation
 Eine klarere Beschriftung der Bewertungsfelder könnten den Prozess für neue Benutzer intuitiver machen.
 
 
@@ -69,5 +69,5 @@ Die Testperson wurde gebeten, verschiedene Suchkriterien zu verwenden. Ich habe 
 ### Ergebnisse
 Die Testperson konnte die Filter-Suche relativ leicht verwenden. Die Suchfilter waren logisch angeordnet. Das Design der Filteroptionen war etwas unübersichtlich, da es keine klare Trennung zwischen den Filterkategorien gab, was zu Verwirrung führte.
 
-### Implikationen
+### Implikation
 Eine übersichtlichere Darstellung der Filteroptionen durch visuelle Trennung der Kategorien könnte dazu beitragen, dass die Benutzer schneller finden, wonach sie suchen. 
