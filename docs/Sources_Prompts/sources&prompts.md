@@ -39,7 +39,7 @@ https://www.youtube.com/watch?v=ic9905SMPzk
 7. Ich erstelle gerade eine Web-App und will Restaurants auf meiner Website anzeigen die ich mithilfe einer API abgreife. Die Liste der Restaurants muss auch gefiltert werden können über die API
 8. Kannst du mir eine spezielle API geben wo ich Restaurants abgreifen kann
 ![image](https://github.com/user-attachments/assets/f023d366-6e4a-4057-bd5a-da08685d1605)
-9.Lies den Code durch und erstell mir bitte eine Technical Documentation
+9. Lies den Code durch und erstell mir bitte eine Technical Documentation
 10. Lies den Code durch und notiere bitte alle Routes (Post, Get)
 
 ## Claude Dev Prompts:
