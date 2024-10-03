@@ -11,75 +11,40 @@ nav_order: 3
 # Reference documentation
 
 {: .attention }
-> This page collects internal functions, routes with their functions, and APIs (if any).
-> 
-> See [Uber](https://developer.uber.com/docs/drivers/references/api) or [PayPal](https://developer.paypal.com/api/rest/) for exemplary high-quality API reference documentation.
->
-> You may delete this `attention` box.
 
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
+ 1.	register(): /register – POST 
+    a.	Registriert einen neuen Benutzer
+   	
+    ![image](https://github.com/user-attachments/assets/7face8de-1fd7-4adf-aa5c-d86e42af940f)
+   
 
-## [Section / module]
+2.	login(): /login – POST
+    a.	Loggt einen Benutzer ein.
+  	
+    ![image](https://github.com/user-attachments/assets/19d18415-1e1d-4be0-994a-55d604695c7e)
 
-### `function_definition()`
+3.	logout(): /logout – GET
+    a.	Loggt einen Benutzer aus.
+  	
+4.	add_tip(): /add_tip – POST
+    a.	Fügt einen Restaurant-Tipp hinzu
+    ![image](https://github.com/user-attachments/assets/8503db03-8eb0-42d7-b68c-877aeed887b8)
 
-**Route:** `/route/`
+5.	index(): / (Startseite) – GET
+    a.	Zeigt die Startseite mit Restaurant-Tipps an.
+6.	search_tip(): /search_tip - GET, POST
+    a.	Ermöglicht Benutzern, nach Restaurants basierend auf Filtern wie Küche, Preisklasse und Standort     zu suchen.
+  	
+  	![image](https://github.com/user-attachments/assets/2c7b98b2-26c6-48c7-addb-319c354d1a38)
+  	
+7.	preferences(): /preferences - GET, POST
+    a.	Ermöglicht Benutzern, ihre Vorlieben anzuzeigen und zu aktualisieren.
+  	
+  	![image](https://github.com/user-attachments/assets/5bd243ea-7abb-432e-8dfc-3081f61f3cb3)
 
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
+8.	restaurant(id): /restaurant/<int:id> - GET
+    a.	Zeigt die Details eines spezifischen Restaurant-Tipps anhand seiner ID an.
+  	
+  	![image](https://github.com/user-attachments/assets/8d30421f-1ebf-488a-9cda-de3d84f72400)
 
-**Purpose:** [Short explanation of what the function does and why]
 
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
----
-
-## [Example, delete this section] Show to-do lists
-
-### `get_lists()`
-
-**Route:** `/lists/`
-
-**Methods:** `GET`
-
-**Purpose:** Show all to-do lists.
-
-**Sample output:**
-
-![get_lists() sample](../assets/images/fswd-intro_00.png)
-
----
-
-### `get_list_todos(list_id)`
-
-**Route:** `/lists/<int:list_id>`
-
-**Methods:** `GET`
-
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
-
-**Sample output:**
-
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
-
----
-
-## [Example, delete this section] Insert sample data
-
-### `run_insert_sample()`
-
-**Route:** `/insert/sample`
-
-**Methods:** `GET`
-
-**Purpose:** Flush the database and insert sample data set
-
-**Sample output:**
-
-Browser shows: `Database flushed and populated with some sample data.`
