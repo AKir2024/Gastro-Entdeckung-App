@@ -25,6 +25,8 @@ Dies ist eine auf Flask basierende Webanwendung, die es regelmäßigen Restauran
 - Flask-WTF
 - Flask-Bcrypt
 - Flask-Login
+- Email-Validator
+- Requests
 
 ## Installation
 
