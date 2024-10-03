@@ -15,8 +15,7 @@ nav_order: 3
  1.	register(): /register – POST 
     a.	Registriert einen neuen Benutzer
    	
-    ![image](https://github.com/user-attachments/assets/7face8de-1fd7-4adf-aa5c-d86e42af940f)
-   
+    <img width="289" alt="image" src="https://github.com/user-attachments/assets/9371218f-2668-4703-a5d2-5baaa54ab655">
 
 2.	login(): /login – POST
     a.	Loggt einen Benutzer ein.
