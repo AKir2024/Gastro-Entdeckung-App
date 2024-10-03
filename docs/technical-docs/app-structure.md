@@ -9,35 +9,48 @@ nav_order: 1
 # App-Structure
 
 {: .attention }
-> This page describes how the application is structured and how important parts of the app work. It should give a new-joiner sufficient technical knowledge for contributing to the codebase.
-> 
-> See [this blog post](https://matklad.github.io/2021/02/06/ARCHITECTURE.md.html) for an explanation of the concept and these examples:
->
-> + <https://github.com/rust-lang/rust-analyzer/blob/master/docs/dev/architecture.md>
-> + <https://github.com/Uriopass/Egregoria/blob/master/ARCHITECTURE.md>
-> + <https://github.com/davish/obsidian-full-calendar/blob/main/src/README.md>
-> 
-> For structural and behavioral illustration, you might want to leverage [Mermaid](../ui-components.md), e.g., by charting common [C4](https://c4model.com/) or [UML](https://www.omg.org/spec/UML) diagrams.
-> 
->
-> You may delete this `attention` box.
 
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
 
-## Overview
+## 1.	instance
+### restaurant_tips.db: 
+Dies ist die SQLite-Datenbank-Datei, in der alle Daten für die Anwendung gespeichert werden. Unter anderem Informationen zu Benutzern, Präferenzen und Tipps zu Restaurants. 
 
-[Give a high-level overview of what your app does and how it achieves it: similar to the value proposition, but targeted at a fellow developer who wishes to contribute.]
+## 2.	static
+### logo.png: 
+Eine Bilddatei, das Logo der Anwendung, die in den HTML-Seiten eingebettet wird.
 
-## Codemap
+### style.css: 
+Eine CSS-Datei, die das Design (Styling) der Anwendung steuert. Sie enthält Regeln, wie die verschiedenen HTML-Elemente (Farben, Layouts, Schriften) auf den Webseiten angezeigt werden.
 
-[Describe how your app is structured. Don't aim for completeness, rather describe *just* the most important parts.]
+## 3.	templates
+### add_tip.html: 
+Ein HTML-Template für die Seite, auf der Benutzer einen neuen Restaurant-Tipp hinzufügen können.
 
-## Cross-cutting concerns
+### base.html: 
+Eine wiederverwendbare Vorlage, die das Grundgerüst der Website enthält (wie Header, Footer etc.). Andere Templates erben von dieser Vorlage.
 
-[Describe anything that is important for a solid understanding of your codebase. Most likely, you want to explain the behavior of (parts of) your application. In this section, you may also link to important [design decisions](../design-decisions.md).]
+### index.html: 
+Das Haupt-Template für die Startseite der Anwendung.
+
+### login.html: 
+Ein Template für die Login-Seite, auf der Benutzer ihre Anmeldedaten eingeben.
+
+### preferences.html: 
+Eine Seite, auf der Benutzer ihre Präferenzen (wie Restaurant-Vorlieben) festlegen oder ändern können.
+
+### register.html:
+Ein Template für die Registrierung neuer Benutzer.
+
+### restaurant.html:
+Diese Seite zeigt wahrscheinlich Details zu einem bestimmten Restaurant, das in der App gefunden wurde.
+
+### search_tip.html: 
+Eine Seite, die eine Suchfunktion bietet, um nach Restaurant-Tipps zu suchen.
+
+## 4.	app.py
+Diese Datei ist das Herzstück der Flask-Anwendung. Sie enthält den Code, der die App startet, die Routen definiert (welche Seiten aufgerufen werden), und die Backend-Logik der App steuert.
+
+## 5.	models.py
+In dieser Datei befinden sich die Definitionen der Datenbankmodelle. Im Bild, das du zuvor geteilt hast, sind die User, Tip, und Preference-Modelle definiert, die die Datenstruktur der Anwendung darstellen.
+
 
