@@ -19,6 +19,9 @@ Alexey Kirchner
 {: toc }
 </details>
 
+## Logo Source --> AI-Generiert mit Chat-GPT
+<img width="545" alt="image" src="https://github.com/user-attachments/assets/df4c6236-5389-4339-8e92-72c146b13543">
+
 ## Youtube Source
 
 1. Video wie man Claude Dev installiert und bedient:
