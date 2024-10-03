@@ -15,14 +15,14 @@ Die Challenge besteht darin, regelmäßige Restaurant- und Barbesucher/innen dab
 {: toc }
 </details>
 
-## The problem
+## Das Problem
 Die vorhandenen Filteroptionen auf bekannten Plattformen wie Google Maps reichen nicht aus, um individuell passende Orte zu finden.
 
-## Solution
+## Lösung
 
 Eine App, die eine spezialisierte Suche ermöglicht, bei der Nutzer/innen nach ihren individuellen Bedürfnissen Restaurants und Bars finden können. Die Möglichkeit, eigene Tipps und Empfehlungen weiterzugeben, schafft zudem eine starke Nutzerbindung.
 
-## Target user
+## Zielgruppe
 
 Regelmäßige Gäste, die spezielle Präferenzen beim Essen oder Trinken haben (z.B. spezielle Ernährungsanforderungen, Ambiente, Preisklasse).
 
