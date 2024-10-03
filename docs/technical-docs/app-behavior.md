@@ -54,11 +54,16 @@ nav_order: 2
 https://docs.developer.yelp.com/docs/fusion-intro
 
 ## 3.	Templating (Jinja2):
--	Der Code verwendet Flask's Templating-Engine Jinja2. Dies erlaubt es, HTML-Templates dynamisch mit Daten vom Server zu rendern. Die Benutzerformulare (Login, Registrierung, Präferenzen, Suche) und Restaurant-Tipps werden wahrscheinlich in diesen Templates dargestellt.
+-	Der Code verwendet Flask's Templating-Engine Jinja2. Dies erlaubt es, HTML-Templates dynamisch mit Daten vom Server zu rendern. Die Benutzerformulare (Login, Registrierung, Präferenzen, Suche) und Restaurant-Tipps werden in diesen Templates dargestellt.
 
 ## 4.	Sicherheit:
 -	CSRF-Schutz: WTForms und Flask-WTF integrieren einen Cross-Site Request Forgery Schutz, um sicherzustellen, dass Formular-Post-Anfragen nur von autorisierten Quellen kommen.
 -	Login-Schutz: Routen wie die Präferenzverwaltung sind durch Flask-Login gesichert, sodass nur authentifizierte Benutzer Zugriff haben.
 
-## 5.	Fehlerbehandlung und Flash-Nachrichten:
--	Die App verwendet Flask’s Flash-Funktion, um Benutzern Feedback zu geben (z.B. ob die Registrierung erfolgreich war oder ob bei der Bearbeitung der Präferenzen ein Fehler aufgetreten ist). Diese Nachrichten werden nach der Weiterleitung an die entsprechenden HTML-Seiten weitergegeben.
+## 5. Javaskript Integration: 
+
+- Formularvalidierung: Bevor die Benutzerdaten an den Server gesendet werden, überprüft JavaScript, ob die erforderlichen Felder korrekt ausgefüllt sind. Dies reduziert serverseitige Fehler und sorgt für eine schnellere Rückmeldung an den Benutzer.
+
+- Dynamische Inhalte: JavaScript ermöglicht die dynamische Aktualisierung von Inhalten auf der Webseite, z. B. das Ein- und Ausblenden von Filtern oder die Anzeige von Suchergebnissen, ohne die Seite komplett neu zu laden. Dies bietet den Benutzern eine reibungslose Interaktion.
+
+- Die Integration von JavaScript in diese Anwendung trägt wesentlich dazu bei, eine moderne, responsive und benutzerfreundliche Webanwendung zu bieten.
