@@ -50,7 +50,7 @@ Dies ist eine auf Flask basierende Webanwendung, die es regelmäßigen Restauran
    pip install requests
    ```
 5. Installiere Paket:
-  ```
+   ```
    pip install email_validator
    ```
    
