@@ -7,6 +7,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from models import db, User, Tip, Preference, init_db
 import os
 import requests
+import logging
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback_secret_key')
@@ -17,9 +18,15 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+logging.basicConfig(level=logging.ERROR)
+
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    try:
+        return User.query.get(int(user_id))
+    except Exception as e:
+        logging.error(f"Error loading user: {e}")
+        return None
 
 # Registration form
 class RegistrationForm(FlaskForm):
@@ -88,7 +95,7 @@ def search_restaurants(query, cuisine=None, price_range=None, rating=None, locat
         print(f"Received response from Yelp API: {data}")  # Debug print
         return data.get('businesses', [])
     except requests.RequestException as e:
-        print(f"Error fetching data from Yelp API: {e}")
+        logging.error(f"Error fetching data from Yelp API: {e}")
         print(f"Response content: {response.content}")  # Debug print
         return []
 
@@ -96,48 +103,69 @@ def search_restaurants(query, cuisine=None, price_range=None, rating=None, locat
 def index():
     search_form = SearchForm()
     if search_form.validate_on_submit():
-        search_results = search_restaurants(
-            query=search_form.search_query.data,
-            cuisine=search_form.cuisine.data,
-            price_range=search_form.price_range.data,
-            rating=search_form.rating.data,
-            location=search_form.location.data
-        )
-        return render_template('index.html', search_results=search_results, form=search_form)
+        try:
+            search_results = search_restaurants(
+                query=search_form.search_query.data,
+                cuisine=search_form.cuisine.data,
+                price_range=search_form.price_range.data,
+                rating=search_form.rating.data,
+                location=search_form.location.data
+            )
+            return render_template('index.html', search_results=search_results, form=search_form)
+        except Exception as e:
+            logging.error(f"Error searching restaurants: {e}")
+            flash('An error occurred while searching restaurants. Please try again.', 'danger')
     else:
-        tips = Tip.query.with_entities(Tip.id, Tip.name, Tip.cuisine, Tip.price_range, Tip.atmosphere, Tip.tip_content).all()
-        return render_template('index.html', tips=tips, form=search_form)
+        try:
+            tips = Tip.query.with_entities(Tip.id, Tip.name, Tip.cuisine, Tip.price_range, Tip.atmosphere, Tip.tip_content).all()
+            return render_template('index.html', tips=tips, form=search_form)
+        except Exception as e:
+            logging.error(f"Error retrieving tips: {e}")
+            flash('An error occurred while retrieving tips. Please try again.', 'danger')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf8')
-        user = User(email=form.email.data, password=hashed_password, country=form.country.data, city=form.city.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created. You can now log in!', 'success')
-        return redirect(url_for('login'))
+        try:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf8')
+            user = User(email=form.email.data, password=hashed_password, country=form.country.data, city=form.city.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Your account has been created. You can now log in!', 'success')
+            return redirect(url_for('login'))
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"Error registering user: {e}")
+            flash('An error occurred while creating your account. Please try again.', 'danger')
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
-            flash('You are now logged in!', 'success')
-            return redirect(url_for('index'))
-        else:
-            flash('Login failed. Please check your email and password.', 'danger')
+        try:
+            user = User.query.filter_by(email=form.email.data).first()
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                flash('You are now logged in!', 'success')
+                return redirect(url_for('index'))
+            else:
+                flash('Login failed. Please check your email and password.', 'danger')
+        except Exception as e:
+            logging.error(f"Error logging in user: {e}")
+            flash('An error occurred while logging in. Please try again.', 'danger')
     return render_template('login.html', form=form)
 
 @app.route('/logout')
 @login_required
 def logout():
-    logout_user()
-    flash('You have been logged out.', 'success')
+    try:
+        logout_user()
+        flash('You have been logged out.', 'success')
+    except Exception as e:
+        logging.error(f"Error logging out user: {e}")
+        flash('An error occurred while logging out. Please try again.', 'danger')
     return redirect(url_for('index'))
 
 @app.route('/add_tip', methods=['GET', 'POST'])
@@ -145,20 +173,25 @@ def logout():
 def add_tip():
     form = TipForm()
     if form.validate_on_submit():
-        new_tip = Tip(
-            name=form.name.data,
-            cuisine=form.cuisine.data,
-            price_range=form.price_range.data,
-            atmosphere=form.atmosphere.data,
-            tip_content=form.tip_content.data,
-            country=form.country.data,
-            city=form.city.data,
-            user_id=current_user.id
-        )
-        db.session.add(new_tip)
-        db.session.commit()
-        flash('Your tip has been added!', 'success')
-        return redirect(url_for('index'))
+        try:
+            new_tip = Tip(
+                name=form.name.data,
+                cuisine=form.cuisine.data,
+                price_range=form.price_range.data,
+                atmosphere=form.atmosphere.data,
+                tip_content=form.tip_content.data,
+                country=form.country.data,
+                city=form.city.data,
+                user_id=current_user.id
+            )
+            db.session.add(new_tip)
+            db.session.commit()
+            flash('Your tip has been added!', 'success')
+            return redirect(url_for('index'))
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"Error adding tip: {e}")
+            flash('An error occurred while adding your tip. Please try again.', 'danger')
     return render_template('add_tip.html', form=form)
 
 @app.route('/search_tip', methods=['GET', 'POST'])
@@ -166,41 +199,55 @@ def search_tip():
     form = SearchForm()
     search_results = []
     if form.validate_on_submit():
-        search_results = search_restaurants(
-            query=form.search_query.data,
-            cuisine=form.cuisine.data,
-            price_range=form.price_range.data,
-            rating=form.rating.data,
-            location=form.location.data
-        )
+        try:
+            search_results = search_restaurants(
+                query=form.search_query.data,
+                cuisine=form.cuisine.data,
+                price_range=form.price_range.data,
+                rating=form.rating.data,
+                location=form.location.data
+            )
+        except Exception as e:
+            logging.error(f"Error searching tips: {e}")
+            flash('An error occurred while searching tips. Please try again.', 'danger')
     return render_template('search_tip.html', form=form, search_results=search_results)
 
 @app.route('/preferences', methods=['GET', 'POST'])
 @login_required
 def preferences():
     form = PreferenceForm()
-    user_preference = Preference.query.filter_by(user_id=current_user.id).first()
+    try:
+        user_preference = Preference.query.filter_by(user_id=current_user.id).first()
+    except Exception as e:
+        logging.error(f"Error retrieving user preference: {e}")
+        flash('An error occurred while retrieving your preferences. Please try again.', 'danger')
+        return redirect(url_for('index'))
     
     if form.validate_on_submit():
-        if user_preference:
-            user_preference.cuisine = form.cuisine.data
-            user_preference.price_range = form.price_range.data
-            user_preference.atmosphere = form.atmosphere.data
-            user_preference.country = form.country.data
-            user_preference.city = form.city.data
-        else:
-            new_preference = Preference(
-                cuisine=form.cuisine.data,
-                price_range=form.price_range.data,
-                atmosphere=form.atmosphere.data,
-                country=form.country.data,
-                city=form.city.data,
-                user_id=current_user.id
-            )
-            db.session.add(new_preference)
-        db.session.commit()
-        flash('Your preferences have been updated!', 'success')
-        return redirect(url_for('index'))
+        try:
+            if user_preference:
+                user_preference.cuisine = form.cuisine.data
+                user_preference.price_range = form.price_range.data
+                user_preference.atmosphere = form.atmosphere.data
+                user_preference.country = form.country.data
+                user_preference.city = form.city.data
+            else:
+                new_preference = Preference(
+                    cuisine=form.cuisine.data,
+                    price_range=form.price_range.data,
+                    atmosphere=form.atmosphere.data,
+                    country=form.country.data,
+                    city=form.city.data,
+                    user_id=current_user.id
+                )
+                db.session.add(new_preference)
+            db.session.commit()
+            flash('Your preferences have been updated!', 'success')
+            return redirect(url_for('index'))
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"Error updating user preference: {e}")
+            flash('An error occurred while updating your preferences. Please try again.', 'danger')
     elif request.method == 'GET' and user_preference:
         form.cuisine.data = user_preference.cuisine
         form.price_range.data = user_preference.price_range
@@ -211,8 +258,13 @@ def preferences():
 
 @app.route('/restaurant/<int:id>')
 def restaurant(id):
-    tip = Tip.query.get_or_404(id)
-    return render_template('restaurant.html', tip=tip)
+    try:
+        tip = Tip.query.get_or_404(id)
+        return render_template('restaurant.html', tip=tip)
+    except Exception as e:
+        logging.error(f"Error retrieving restaurant tip: {e}")
+        flash('An error occurred while retrieving the restaurant tip. Please try again.', 'danger')
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

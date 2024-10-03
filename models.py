@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+import logging
 
 db = SQLAlchemy()
 
@@ -35,7 +36,11 @@ class Preference(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 def init_db(app):
-    db.init_app(app)
-    with app.app_context():
-        db.drop_all()  # This will drop all existing tables
-        db.create_all()  # This will create all tables based on the current models
+    try:
+        db.init_app(app)
+        with app.app_context():
+            db.drop_all()  # This will drop all existing tables
+            db.create_all()  # This will create all tables based on the current models
+    except Exception as e:
+        logging.error(f"Error initializing database: {e}")
+        raise
