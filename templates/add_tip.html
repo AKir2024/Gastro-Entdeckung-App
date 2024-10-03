@@ -1,66 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Restaurant Tip</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Add Restaurant Tip</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('search_tip') }}">Search Tips</a></li>
-                <li><a href="{{ url_for('preferences') }}">Preferences</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <section class="add-tip-form">
-            <h2>Share Your Restaurant Tip</h2>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.name.label }}
-                    {{ form.name }}
-                </div>
-                <div class="form-group">
-                    {{ form.cuisine.label }}
-                    {{ form.cuisine }}
-                </div>
-                <div class="form-group">
-                    {{ form.price_range.label }}
-                    {{ form.price_range }}
-                </div>
-                <div class="form-group">
-                    {{ form.atmosphere.label }}
-                    {{ form.atmosphere }}
-                </div>
-                <div class="form-group">
-                    {{ form.country.label }}
-                    {{ form.country }}
-                </div>
-                <div class="form-group">
-                    {{ form.city.label }}
-                    {{ form.city }}
-                </div>
-                <div class="form-group">
-                    {{ form.tip_content.label }}
-                    {{ form.tip_content }}
-                </div>
-                <div class="form-group">
-                    {{ form.submit }}
-                </div>
-            </form>
-        </section>
-    </main>
+{% block title %}Add Restaurant Tip{% endblock %}
 
-    <footer>
-        <p>&copy; 2023 Restaurant Tips for Regular Visitors. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+<div class="center-content">
+    <div class="form-container">
+        <h2>Share Your Restaurant Tip</h2>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.cuisine.label }}
+                {{ form.cuisine(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.price_range.label }}
+                {{ form.price_range(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.atmosphere.label }}
+                {{ form.atmosphere(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.country.label }}
+                {{ form.country(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.city.label }}
+                {{ form.city(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.tip_content.label }}
+                {{ form.tip_content(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

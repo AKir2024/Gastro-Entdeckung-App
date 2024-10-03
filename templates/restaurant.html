@@ -1,43 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ tip.name }} - Restaurant Tip</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Restaurant Tip Details</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('search_tip') }}">Search Tips</a></li>
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('add_tip') }}">Add Tip</a></li>
-                    <li><a href="{{ url_for('preferences') }}">Preferences</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <section class="restaurant-tip">
-            <h2>{{ tip.name }}</h2>
-            <p><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
-            <p><strong>Price Range:</strong> {{ tip.price_range }}</p>
-            <p><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
-            <h3>Tip</h3>
-            <p>{{ tip.tip_content }}</p>
-        </section>
-    </main>
+{% block title %}{{ tip.name }} - Restaurant Tip{% endblock %}
 
-    <footer>
-        <p>&copy; 2023 Restaurant Tips for Regular Visitors. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+    <section class="restaurant-tip">
+        <h2>{{ tip.name }}</h2>
+        <p><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
+        <p><strong>Price Range:</strong> {{ tip.price_range }}</p>
+        <p><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
+        <h3>Tip</h3>
+        <p>{{ tip.tip_content }}</p>
+    </section>
+{% endblock %}

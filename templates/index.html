@@ -10,6 +10,7 @@
 
     <section class="search-form">
         <h3>Search Restaurants</h3>
+        <p><strong>Note:</strong> All search fields must be filled in order to generate a list of restaurants.</p>
         <form method="POST" action="{{ url_for('index') }}">
             {{ form.hidden_tag() }}
             <div>

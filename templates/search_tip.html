@@ -43,7 +43,7 @@
                     <p><strong>Rating:</strong> {{ business.rating }}</p>
                     <p><strong>Price Level:</strong> {{ business.price }}</p>
                     <p><strong>Cuisine:</strong> {{ ', '.join(business.categories|map(attribute='title')) }}</p>
-                    <a href="{{ business.url }}" target="_blank">View on Yelp</a>
+                    <a href="{{ business.url }}" target="_blank">Open this Restaurant</a>
                 </article>
             {% endfor %}
         {% else %}
