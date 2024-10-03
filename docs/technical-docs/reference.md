@@ -28,14 +28,17 @@ nav_order: 3
   	
 4.	add_tip(): /add_tip – POST
     a.	Fügt einen Restaurant-Tipp hinzu
+  	
     ![image](https://github.com/user-attachments/assets/8503db03-8eb0-42d7-b68c-877aeed887b8)
 
-5.	index(): / (Startseite) – GET
+
+6.	index(): / (Startseite) – GET
     a.	Zeigt die Startseite mit Restaurant-Tipps an.
-6.	search_tip(): /search_tip - GET, POST
+7.	search_tip(): /search_tip - GET, POST
     a.	Ermöglicht Benutzern, nach Restaurants basierend auf Filtern wie Küche, Preisklasse und Standort     zu suchen.
   	
-  	![image](https://github.com/user-attachments/assets/2c7b98b2-26c6-48c7-addb-319c354d1a38)
+   <img width="814" alt="image" src="https://github.com/user-attachments/assets/6fb86d88-e756-445f-a972-44af445b743b">
+
   	
 7.	preferences(): /preferences - GET, POST
     a.	Ermöglicht Benutzern, ihre Vorlieben anzuzeigen und zu aktualisieren.
