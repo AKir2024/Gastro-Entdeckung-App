@@ -52,3 +52,22 @@ Meine Schwester konnte den Tipp erfolgreich abgeben, jedoch dauerte es länger a
 
 ### Implikationen
 Eine klarere Beschriftung der Bewertungsfelder könnten den Prozess für neue Benutzer intuitiver machen.
+
+
+## 03: Gastro-Suche mit Filtern
+Meta
+Status: In Arbeit
+
+Aktualisiert: 03-10-2024
+
+### Ziel
+Das Ziel dieser Evaluation war es, zu überprüfen, ob die Filter-Suche nach Gastronomiebetrieben effizient und benutzerfreundlich ist.
+
+### Methode
+Die Testperson wurde gebeten, verschiedene Suchkriterien zu verwenden. Ich habe dabei ihre Interaktionen und die Dauer der Suchvorgänge beobachtet.
+
+### Ergebnisse
+Die Testperson konnte die Filter-Suche relativ leicht verwenden. Die Suchfilter waren logisch angeordnet. Das Design der Filteroptionen war etwas unübersichtlich, da es keine klare Trennung zwischen den Filterkategorien gab, was zu Verwirrung führte.
+
+### Implikationen
+Eine übersichtlichere Darstellung der Filteroptionen durch visuelle Trennung der Kategorien könnte dazu beitragen, dass die Benutzer schneller finden, wonach sie suchen. 
