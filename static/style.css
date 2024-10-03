@@ -244,15 +244,20 @@ body {
      }
 
     /* Logo and Headline Styles */
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+
     .navbar-brand {
         font-size: 1.5rem;
         font-weight: bold;
         color: #343a40;
-        padding-left: 0.5rem;
+        padding: 0;
+        margin-left: 0.5rem;
     }
 
     .logo-img {
         max-width: 40px;
-        margin-right: 0.5rem;
         vertical-align: middle;
     }

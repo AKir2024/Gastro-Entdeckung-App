@@ -10,10 +10,10 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{ url_for('index') }}">
+            <div class="logo-container">
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
-                Restaurant Tips
-            </a>
+                <span class="navbar-brand">Gastro-Entdeckung</span>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,7 +55,7 @@
 
     <footer class="bg-light py-3 mt-5">
         <div class="container text-center">
-            <p>&copy; 2023 Restaurant Tips. All rights reserved.</p>
+            <p>&copy; 2024 Restaurant Tips. All rights reserved.</p>
         </div>
     </footer>
 
