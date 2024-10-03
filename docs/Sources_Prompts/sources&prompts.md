@@ -29,6 +29,10 @@ https://www.youtube.com/watch?v=ic9905SMPzk
 2. https://hwrberlin.github.io/fswd/
    
 ## ChatGPT Prompts (https://chatgpt.com):
+- https://chatgpt.com/share/66ff2127-3790-8004-9779-7b5f2e0f7580
+- https://chatgpt.com/share/66ff2127-3790-8004-9779-7b5f2e0f7580
+-->Mehr Antworten im Prompts Ordner
+  
 ![image](https://github.com/user-attachments/assets/9960f3a8-b301-428f-9bbc-685d9180ea76)
 1. Aber bitte generier mir eine Startseite, auf der man sich einloggen oder registrieren kann und das gekoppelt an eine SQL Lite Datenbank.
 2. Ich kann die Datenbank nicht erstellen. Gibt es einen anderen weg ?
