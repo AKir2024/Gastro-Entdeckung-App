@@ -46,7 +46,7 @@ Dies ist eine auf Flask basierende Webanwendung, die es regelmäßigen Restauran
    pip install flask flask-sqlalchemy flask-wtf flask-bcrypt flask-login
    ```
 4. Installiere das Modul requests:
-Installiere das fehlende Modul mit dem folgenden Befehl:
+Installiere das Modul mit dem folgenden Befehl:
    ```
    pip install requests
    ```
