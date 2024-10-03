@@ -48,6 +48,10 @@ This is a Flask-based web application that allows regular restaurant visitors to
    ```
    pip install requests
    ```
+5. Install package:
+   ```
+   pip install email_validator
+   ```
 
 ## Running the Application
 
