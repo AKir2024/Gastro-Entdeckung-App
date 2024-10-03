@@ -16,30 +16,39 @@ Alexey Kirchner
 {: toc }
 </details>
 
-## 01: [Title]
+## 01: Registrierung und Login
 
 ### Meta
+Status: In Arbeit
 
-Status
-: **Work in progress** - Done - Obsolete
+Aktualisiert: 03-10-2024
 
-Updated
-: DD-MMM-YYYY
+### Ziel
+Das Ziel dieser Evaluation ist es, die Benutzerfreundlichkeit des Registrierungs- und Login-Prozesses für einen durchschnittlichen Benutzer zu bewerten und sicherzustellen, dass der Vorgang einfach und effizient ist.
 
-### Goal
+### Methode
+Ich habe die Schwester als Testperson eingesetzt, diese hat ein neues Konto zu erstellen müssen mit einer E-Mail (Bsp. ...@gmx.com) und sich mit den von ihr gewählten Anmeldedaten einzuloggen. Die benötigte Zeit für jeden Schritt wurde gemessen.
 
-[Describe the goal of this evaluation, for example as a research question like: "How long does it take to register a new account and what is the drop-out rate?"]
+### Ergebnisse
+Der gesamte Registrierungsprozess dauerte etwa 40 Sekunden. Meine Schwester fand den Vorgang leicht verständlich, mit gut beschrifteten Feldern und klaren Anweisungen. Sie bemerkte jedoch, dass bei Falscher Eingabe keine Meldung erschienen ist. 
 
-### Method
+### Implikationen
+Um den Prozess für den Nutzer Verständlicher zu machen könnte die Implementierung einer Meldung bei Falscheingabe helfen.
 
-[Describe how you proceed to achieve your evaluation goal. Be as specific as possible: others should be able to replicate your evaluation by following the description on this section.]
+## 02: Gastro Tipp abgeben
+Meta
+Status: In Arbeit
 
-### Results
+Aktualisiert: 03-10-2024
 
-[Present the main results of your evaluation, for example: "On average, users need 3 min to register. The drop-out rate was 70%. Users that didn't complete provided the following reasons: ..."]
+### Ziel
+Das Ziel dieser Evaluation war es zu überprüfen, ob das Abgeben eines Gastro-Tipps einfach und intuitiv für den Benutzer ist.
 
-### Implications
+### Methode
+Ich habe die Testperson angewiesen, einen Gastro-Tipp abzugeben und zu sehen, wie leicht der Prozess für sie zu verstehen ist.
 
-[What did you learn from this evaluation and what will you change to improve? Example: "We aim to decrease the drop-out rate by not asking for a birth date. We will re-run this evaluation to measure the impact."]
+### Ergebnisse
+Meine Schwester konnte den Tipp erfolgreich abgeben, jedoch dauerte es länger als erwartet, da einige Felder nicht klar beschriftet waren. Daher musste Sie den Prozess kurz unterbrechen, um die Funktion zu verstehen. Sobald sie das System verstanden hatte, konnte sie den Tipp problemlos abgeben.
 
----
+### Implikationen
+Eine klarere Beschriftung der Bewertungsfelder könnten den Prozess für neue Benutzer intuitiver machen.
