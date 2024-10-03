@@ -1,24 +1,88 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Restaurant Tips{% endblock %}
+{% block title %}Home - Restaurant Search{% endblock %}
 
 {% block content %}
-    <h2>Latest Restaurant Tips</h2>
+    <h2>Restaurant Search</h2>
     {% if current_user.is_authenticated %}
         <p>Welcome back, {{ current_user.email }}!</p>
     {% endif %}
-    <section class="tips">
+
+    <section class="search-form">
+        <h3>Search Restaurants</h3>
+        <form method="POST" action="{{ url_for('index') }}">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.search_query.label }}
+                {{ form.search_query(class="form-control") }}
+            </div>
+            <div>
+                {{ form.cuisine.label }}
+                {{ form.cuisine(class="form-control") }}
+            </div>
+            <div>
+                {{ form.price_range.label }}
+                {{ form.price_range(class="form-control") }}
+            </div>
+            <div>
+                {{ form.rating.label }}
+                {{ form.rating(class="form-control") }}
+            </div>
+            <div>
+                {{ form.location.label }}
+                {{ form.location(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-primary mt-2") }}
+        </form>
+    </section>
+
+    <section class="search-results mt-4">
+        <h3>Search Results</h3>
+        {% if search_results %}
+            <div class="row">
+            {% for business in search_results %}
+                <div class="col-md-6 mb-4">
+                    <article class="restaurant card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ business.name }}</h4>
+                            <p class="card-text"><strong>Address:</strong> {{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
+                            <p class="card-text"><strong>Rating:</strong> {{ business.rating }} ({{ business.review_count }} reviews)</p>
+                            <p class="card-text"><strong>Price Level:</strong> {{ business.price }}</p>
+                            <p class="card-text"><strong>Cuisine:</strong> {{ ', '.join(business.categories|map(attribute='title')) }}</p>
+                            <p class="card-text"><strong>Phone:</strong> {{ business.phone }}</p>
+                            {% if business.image_url %}
+                                <img src="{{ business.image_url }}" alt="{{ business.name }}" class="img-fluid mb-2">
+                            {% endif %}
+                            <a href="{{ business.url }}" target="_blank" class="btn btn-sm btn-outline-primary">View on Yelp</a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No restaurants found. Try a different search.</p>
+        {% endif %}
+    </section>
+
+    <section class="tips mt-4">
+        <h3>Latest Restaurant Tips</h3>
+        <div class="row">
         {% for tip in tips %}
-            <article class="tip">
-                <h3><a href="{{ url_for('restaurant', id=tip.id) }}">{{ tip.name }}</a></h3>
-                <p><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
-                <p><strong>Price Range:</strong> {{ tip.price_range }}</p>
-                <p><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
-                <p>{{ tip.tip_content[:100] }}{% if tip.tip_content|length > 100 %}...{% endif %}</p>
-                <a href="{{ url_for('restaurant', id=tip.id) }}">Read more</a>
-            </article>
+            <div class="col-md-4 mb-3">
+                <article class="tip card">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="{{ url_for('restaurant', id=tip.id) }}">{{ tip.name }}</a></h4>
+                        <p class="card-text"><strong>Cuisine:</strong> {{ tip.cuisine }}</p>
+                        <p class="card-text"><strong>Price Range:</strong> {{ tip.price_range }}</p>
+                        <p class="card-text"><strong>Atmosphere:</strong> {{ tip.atmosphere }}</p>
+                        <p class="card-text">{{ tip.tip_content[:100] }}{% if tip.tip_content|length > 100 %}...{% endif %}</p>
+                        <a href="{{ url_for('restaurant', id=tip.id) }}" class="btn btn-sm btn-outline-secondary">Read more</a>
+                    </div>
+                </article>
+            </div>
         {% else %}
             <p>No tips available yet. Be the first to add one!</p>
         {% endfor %}
+        </div>
     </section>
 {% endblock %}

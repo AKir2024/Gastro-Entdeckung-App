@@ -8,14 +8,14 @@
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ form.email.label }}
-            {{ form.email }}
+            {{ form.email(class="form-control") }}
         </div>
         <div class="form-group">
             {{ form.password.label }}
-            {{ form.password }}
+            {{ form.password(class="form-control") }}
         </div>
         <div class="form-group">
-            {{ form.submit }}
+            {{ form.submit(class="btn btn-primary") }}
         </div>
     </form>
     <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>

@@ -1,31 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrieren</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-    <h1>Registriere dich</h1>
-    <form method="POST">
+{% extends "base.html" %}
+
+{% block title %}Register - Restaurant Tips{% endblock %}
+
+{% block content %}
+    <h2>Register</h2>
+    <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.email.label }}<br>
-            {{ form.email }}
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control") }}
         </div>
-        <div>
-            {{ form.password.label }}<br>
-            {{ form.password }}
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control") }}
         </div>
-        <div>
-            {{ form.confirm_password.label }}<br>
-            {{ form.confirm_password }}
+        <div class="form-group">
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class="form-control") }}
         </div>
-        <div>
-            {{ form.submit }}
+        <div class="form-group">
+            {{ form.country.label }}
+            {{ form.country(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.city.label }}
+            {{ form.city(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
         </div>
     </form>
-    <a href="{{ url_for('index') }}">Zurück zur Startseite</a>
-</div>
-</body>
-</html>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+{% endblock %}

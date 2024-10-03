@@ -1,44 +1,21 @@
-from flask import Flask, render_template, redirect, url_for, flash, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, redirect, url_for, flash, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from models import db, User, Tip, Preference, init_db
 import os
+import requests
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback_secret_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurant_tips.db'
-db = SQLAlchemy(app)
+app.config['YELP_API_KEY'] = 'mQ9XqMdnmLZYIwivLZchGr0lIO7IrfVE2y_yiMCjOWBrxD5sejhnhatOskqQuWl_oLXm-Ny1O0L0nvAPKWuR0Z58PYKbEsav3KI684TljbA7KxDM3IYJLE89RO39ZnYx'
+init_db(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
-
-# User model
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(150), nullable=False)
-    preferences = db.relationship('Preference', backref='user', lazy=True)
-
-# Restaurant tip model
-class Tip(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    cuisine = db.Column(db.String(50), nullable=False)
-    price_range = db.Column(db.String(20), nullable=False)
-    atmosphere = db.Column(db.String(50), nullable=False)
-    tip_content = db.Column(db.String(500), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-# User preference model
-class Preference(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    cuisine = db.Column(db.String(50), nullable=False)
-    price_range = db.Column(db.String(20), nullable=False)
-    atmosphere = db.Column(db.String(50), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -49,6 +26,8 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(), Length(min=6, max=150)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    country = StringField('Country', validators=[DataRequired(), Length(max=100)])
+    city = StringField('City', validators=[DataRequired(), Length(max=100)])
     submit = SubmitField('Register')
 
 # Login form
@@ -61,37 +40,80 @@ class LoginForm(FlaskForm):
 class SearchForm(FlaskForm):
     search_query = StringField('Search Query', validators=[DataRequired()])
     cuisine = SelectField('Cuisine', choices=[('', 'Any'), ('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
-    price_range = SelectField('Price Range', choices=[('', 'Any'), ('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
-    atmosphere = SelectField('Atmosphere', choices=[('', 'Any'), ('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
+    price_range = SelectField('Price Range', choices=[('', 'Any'), ('1', '$'), ('2', '$$'), ('3', '$$$'), ('4', '$$$$')])
+    rating = SelectField('Minimum Rating', choices=[('', 'Any'), ('3', '3+'), ('4', '4+'), ('5', '5')])
+    location = StringField('Location', validators=[DataRequired()])
     submit = SubmitField('Search')
 
 # Tip form
 class TipForm(FlaskForm):
     name = StringField('Restaurant Name', validators=[DataRequired(), Length(max=100)])
     cuisine = SelectField('Cuisine', choices=[('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
-    price_range = SelectField('Price Range', choices=[('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
+    price_range = SelectField('Price Range', choices=[('$', 'Budget'), ('$$', 'Midrange'), ('$$$', 'Expensive')])
     atmosphere = SelectField('Atmosphere', choices=[('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
     tip_content = TextAreaField('Your Tip', validators=[DataRequired(), Length(min=10, max=500)])
+    country = StringField('Country', validators=[DataRequired(), Length(max=100)])
+    city = StringField('City', validators=[DataRequired(), Length(max=100)])
     submit = SubmitField('Add Tip')
 
 # Preference form
 class PreferenceForm(FlaskForm):
     cuisine = SelectField('Favorite Cuisine', choices=[('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
-    price_range = SelectField('Preferred Price Range', choices=[('$', 'Budget'), ('$$', 'Mid-range'), ('$$$', 'Expensive')])
+    price_range = SelectField('Preferred Price Range', choices=[('$', 'Budget'), ('$$', 'Midrange'), ('$$$', 'Expensive')])
     atmosphere = SelectField('Preferred Atmosphere', choices=[('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
+    country = StringField('Preferred Country', validators=[DataRequired(), Length(max=100)])
+    city = StringField('Preferred City', validators=[DataRequired(), Length(max=100)])
     submit = SubmitField('Save Preferences')
 
-@app.route('/')
+def search_restaurants(query, cuisine=None, price_range=None, rating=None, location=None):
+    url = "https://api.yelp.com/v3/businesses/search"
+    headers = {
+        "Authorization": f"Bearer {app.config['YELP_API_KEY']}"
+    }
+    params = {
+        "term": query,
+        "location": location,
+        "categories": cuisine,
+        "price": price_range,
+        "rating": rating,
+        "limit": 20
+    }
+    # Remove empty parameters
+    params = {k: v for k, v in params.items() if v}
+    try:
+        print(f"Sending request to Yelp API with params: {params}")  # Debug print
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        print(f"Received response from Yelp API: {data}")  # Debug print
+        return data.get('businesses', [])
+    except requests.RequestException as e:
+        print(f"Error fetching data from Yelp API: {e}")
+        print(f"Response content: {response.content}")  # Debug print
+        return []
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    tips = Tip.query.all()
-    return render_template('index.html', tips=tips)
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        search_results = search_restaurants(
+            query=search_form.search_query.data,
+            cuisine=search_form.cuisine.data,
+            price_range=search_form.price_range.data,
+            rating=search_form.rating.data,
+            location=search_form.location.data
+        )
+        return render_template('index.html', search_results=search_results, form=search_form)
+    else:
+        tips = Tip.query.with_entities(Tip.id, Tip.name, Tip.cuisine, Tip.price_range, Tip.atmosphere, Tip.tip_content).all()
+        return render_template('index.html', tips=tips, form=search_form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(email=form.email.data, password=hashed_password)
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf8')
+        user = User(email=form.email.data, password=hashed_password, country=form.country.data, city=form.city.data)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created. You can now log in!', 'success')
@@ -129,6 +151,8 @@ def add_tip():
             price_range=form.price_range.data,
             atmosphere=form.atmosphere.data,
             tip_content=form.tip_content.data,
+            country=form.country.data,
+            city=form.city.data,
             user_id=current_user.id
         )
         db.session.add(new_tip)
@@ -142,16 +166,13 @@ def search_tip():
     form = SearchForm()
     search_results = []
     if form.validate_on_submit():
-        query = Tip.query
-        if form.search_query.data:
-            query = query.filter(Tip.name.like(f'%{form.search_query.data}%') | Tip.tip_content.like(f'%{form.search_query.data}%'))
-        if form.cuisine.data:
-            query = query.filter(Tip.cuisine == form.cuisine.data)
-        if form.price_range.data:
-            query = query.filter(Tip.price_range == form.price_range.data)
-        if form.atmosphere.data:
-            query = query.filter(Tip.atmosphere == form.atmosphere.data)
-        search_results = query.all()
+        search_results = search_restaurants(
+            query=form.search_query.data,
+            cuisine=form.cuisine.data,
+            price_range=form.price_range.data,
+            rating=form.rating.data,
+            location=form.location.data
+        )
     return render_template('search_tip.html', form=form, search_results=search_results)
 
 @app.route('/preferences', methods=['GET', 'POST'])
@@ -165,11 +186,15 @@ def preferences():
             user_preference.cuisine = form.cuisine.data
             user_preference.price_range = form.price_range.data
             user_preference.atmosphere = form.atmosphere.data
+            user_preference.country = form.country.data
+            user_preference.city = form.city.data
         else:
             new_preference = Preference(
                 cuisine=form.cuisine.data,
                 price_range=form.price_range.data,
                 atmosphere=form.atmosphere.data,
+                country=form.country.data,
+                city=form.city.data,
                 user_id=current_user.id
             )
             db.session.add(new_preference)
@@ -180,6 +205,8 @@ def preferences():
         form.cuisine.data = user_preference.cuisine
         form.price_range.data = user_preference.price_range
         form.atmosphere.data = user_preference.atmosphere
+        form.country.data = user_preference.country
+        form.city.data = user_preference.city
     return render_template('preferences.html', form=form)
 
 @app.route('/restaurant/<int:id>')
@@ -187,10 +214,5 @@ def restaurant(id):
     tip = Tip.query.get_or_404(id)
     return render_template('restaurant.html', tip=tip)
 
-def create_tables():
-    with app.app_context():
-        db.create_all()
-
 if __name__ == '__main__':
-    create_tables()
     app.run(debug=True)
