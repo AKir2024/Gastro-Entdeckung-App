@@ -16,7 +16,7 @@ nav_order: 2
 -	Ein Logout-Mechanismus ermöglicht es den Benutzern, sich sicher aus der App abzumelden.
 
 ## 2.	Restaurant-Tipps hinzufügen:
--	Angemeldete Benutzer können neue Restaurant-Tipps hinzufügen. Diese Informationen beinhalten Angaben zu Restaurants und eventuell persönliche Bewertungen oder Empfehlungen (Tipps).
+-	Angemeldete Benutzer können neue Restaurant-Tipps hinzufügen. Diese Informationen beinhalten Angaben zu Restaurants und persönliche Bewertungen oder Empfehlungen (Tipps).
 -	Es gibt eine Funktion, um eine Restaurantbewertung oder einen Tipp in die Datenbank hinzuzufügen.
 
 ## 3.	Homepage mit Tipps anzeigen:
@@ -26,10 +26,10 @@ nav_order: 2
 ## 4.	Benutzerpräferenzen speichern und anzeigen:
 -	Benutzer können ihre Essenspräferenzen (Küche, Preisklasse, Atmosphäre, Land, Stadt) in einem speziellen Bereich der App speichern.
 -	Wenn die Präferenzen bereits gespeichert wurden, können sie auch nachträglich bearbeitet und aktualisiert werden.
--	Die gespeicherten Vorlieben beeinflussen wahrscheinlich die Suchergebnisse oder Empfehlungen für den Benutzer.
+-	Die gespeicherten Vorlieben beeinflussen die Suchergebnisse oder Empfehlungen für den Benutzer.
 
 ## 5.	Details zu Restaurant-Tipps anzeigen:
--	Benutzer können die Details eines spezifischen Restaurant-Tipps anzeigen lassen, indem sie auf den entsprechenden Link klicken. Diese Seite zeigt wahrscheinlich eine detaillierte Ansicht des Restaurants und die zugehörigen Tipps an.
+-	Benutzer können die Details eines spezifischen Restaurant-Tipps anzeigen lassen, indem sie auf den entsprechenden Link klicken. Diese Seite zeigt eine detaillierte Ansicht des Restaurants und die zugehörigen Tipps an.
 
 ## 6.	Interaktion mit Yelp-API:
 -	Die App integriert die Yelp-API, um zusätzliche Informationen über Restaurants zu erhalten. Das könnte bedeuten, dass die App Echtzeit-Daten zu Restaurants (wie Bewertungen, Preise, Fotos, usw.) abruft und dem Benutzer präsentiert.
