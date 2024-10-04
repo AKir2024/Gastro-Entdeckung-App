@@ -63,3 +63,4 @@ https://www.youtube.com/watch?v=ic9905SMPzk
 10. Make my app pull restaurants from the yelp api please
 11. Put the yelp api key in the code please: mQ9XqMdnmLZYIwivLZchGr0lIO7IrfVE2y_yiMCjOWBrxD5sejhnhatOskqQuWl_oLXm-Ny1O0L0nvAPKWuR0Z58PYKbEsav3KI684TljbA7KxDM3IYJLE89RO39ZnYx
 12. Can you please make @/templates/search_tip.html and @/templates/preferences.html the same desgin as all the other sites
+-->MEHR ANTWORTEN IM ´all_prompts´ ORDNER
