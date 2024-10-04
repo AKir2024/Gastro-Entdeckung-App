@@ -27,7 +27,7 @@ Aktualisiert: 03-10-2024
 Das Ziel dieser Evaluation ist es, die Benutzerfreundlichkeit des Registrierungs- und Login-Prozesses für einen durchschnittlichen Benutzer zu bewerten und sicherzustellen, dass der Vorgang einfach und effizient ist.
 
 ### Methode
-Ich habe die Schwester als Testperson eingesetzt, diese hat ein neues Konto zu erstellen müssen mit einer E-Mail (Bsp. ...@gmx.com) und sich mit den von ihr gewählten Anmeldedaten einzuloggen. Die benötigte Zeit für jeden Schritt wurde gemessen.
+Ich habe meine Schwester als Testperson eingesetzt, diese hat ein neues Konto zu erstellen müssen mit einer E-Mail (Bsp. ...@gmx.com) und sich mit den von ihr gewählten Anmeldedaten einzuloggen. Die benötigte Zeit für jeden Schritt wurde gemessen.
 
 ### Ergebnisse
 Der gesamte Registrierungsprozess dauerte etwa 40 Sekunden. Meine Schwester fand den Vorgang leicht verständlich, mit gut beschrifteten Feldern und klaren Anweisungen. Sie bemerkte jedoch, dass bei Falscher Eingabe keine Meldung erschienen ist. 
