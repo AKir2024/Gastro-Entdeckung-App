@@ -42,7 +42,7 @@ Eine Seite, auf der Benutzer ihre Präferenzen (wie Restaurant-Vorlieben) festle
 Ein Template für die Registrierung neuer Benutzer.
 
 ### restaurant.html:
-Diese Seite zeigt wahrscheinlich Details zu einem bestimmten Restaurant, das in der App gefunden wurde.
+Diese Seite zeigt Details zu einem bestimmten Restaurant, das in der App gefunden wurde.
 
 ### search_tip.html: 
 Eine Seite, die eine Suchfunktion bietet, um nach Restaurant-Tipps zu suchen.
@@ -51,6 +51,6 @@ Eine Seite, die eine Suchfunktion bietet, um nach Restaurant-Tipps zu suchen.
 Diese Datei ist das Herzstück der Flask-Anwendung. Sie enthält den Code, der die App startet, die Routen definiert (welche Seiten aufgerufen werden), und die Backend-Logik der App steuert.
 
 ## 5.	models.py
-In dieser Datei befinden sich die Definitionen der Datenbankmodelle. Im Bild, das du zuvor geteilt hast, sind die User, Tip, und Preference-Modelle definiert, die die Datenstruktur der Anwendung darstellen.
+In dieser Datei befinden sich die Definitionen der Datenbankmodelle. Die Datenstruktur besteht aus user, tipp und reference Model.
 
 
