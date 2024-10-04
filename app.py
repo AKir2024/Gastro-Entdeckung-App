@@ -48,13 +48,13 @@ class SearchForm(FlaskForm):
     search_query = StringField('Search Query', validators=[DataRequired()])
     cuisine = SelectField('Cuisine', choices=[('', 'Any'), ('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
     price_range = SelectField('Price Range', choices=[('', 'Any'), ('1', '$'), ('2', '$$'), ('3', '$$$'), ('4', '$$$$')])
-    rating = SelectField('Minimum Rating', choices=[('', 'Any'), ('3', '3+'), ('4', '4+'), ('5', '5')])
+    rating = SelectField('Minimum Rating', choices=[('', 'Any'), ('3', '3'), ('4', '4'), ('5', '5')])
     location = StringField('Location', validators=[DataRequired()])
     submit = SubmitField('Search')
 
 # Tip form
 class TipForm(FlaskForm):
-    name = StringField('Restaurant Name', validators=[DataRequired(), Length(max=100)])
+    name = StringField('Restaurant & Bars Name', validators=[DataRequired(), Length(max=100)])
     cuisine = SelectField('Cuisine', choices=[('italian', 'Italian'), ('chinese', 'Chinese'), ('mexican', 'Mexican'), ('american', 'American')])
     price_range = SelectField('Price Range', choices=[('$', 'Budget'), ('$$', 'Midrange'), ('$$$', 'Expensive')])
     atmosphere = SelectField('Atmosphere', choices=[('casual', 'Casual'), ('formal', 'Formal'), ('family', 'Family-friendly'), ('romantic', 'Romantic')])
@@ -113,8 +113,8 @@ def index():
             )
             return render_template('index.html', search_results=search_results, form=search_form)
         except Exception as e:
-            logging.error(f"Error searching restaurants: {e}")
-            flash('An error occurred while searching restaurants. Please try again.', 'danger')
+            logging.error(f"Error searching restaurants & bars: {e}")
+            flash('An error occurred while searching restaurants & bars. Please try again.', 'danger')
     else:
         try:
             tips = Tip.query.with_entities(Tip.id, Tip.name, Tip.cuisine, Tip.price_range, Tip.atmosphere, Tip.tip_content).all()
@@ -262,9 +262,9 @@ def restaurant(id):
         tip = Tip.query.get_or_404(id)
         return render_template('restaurant.html', tip=tip)
     except Exception as e:
-        logging.error(f"Error retrieving restaurant tip: {e}")
-        flash('An error occurred while retrieving the restaurant tip. Please try again.', 'danger')
+        logging.error(f"Error retrieving restaurant & bars tip: {e}")
+        flash('An error occurred while retrieving the restaurant & bars tip. Please try again.', 'danger')
         return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     app.run(debug=True)

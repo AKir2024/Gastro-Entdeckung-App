@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(100), nullable=False)
     preferences = db.relationship('Preference', backref='user', lazy=True)
 
-# Restaurant tip model
+# Restaurant & Bar tip model
 class Tip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
