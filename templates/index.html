@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Restaurant Search{% endblock %}
+{% block title %}Home - Restaurant & Bars Search{% endblock %}
 
 {% block content %}
     <h2>Kulinarische Geheimtipps für Feinschmecker</h2>
@@ -9,8 +9,8 @@
     {% endif %}
 
     <section class="search-form">
-        <h3>Search Restaurants</h3>
-        <p><strong>Note:</strong> All search fields must be filled in order to generate a list of restaurants.</p>
+        <h3>Search Restaurants & Bars</h3>
+        <p><strong>Note:</strong> All search fields must be filled in order to generate a list of restaurants & bars.</p>
         <form method="POST" action="{{ url_for('index') }}">
             {{ form.hidden_tag() }}
             <div>
@@ -43,7 +43,7 @@
             <div class="row">
             {% for business in search_results %}
                 <div class="col-md-6 mb-4">
-                    <article class="restaurant card">
+                    <article class="restaurant-bar card">
                         <div class="card-body">
                             <h4 class="card-title">{{ business.name }}</h4>
                             <p class="card-text"><strong>Address:</strong> {{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
@@ -61,12 +61,12 @@
             {% endfor %}
             </div>
         {% else %}
-            <p>No restaurants found. Try a different search.</p>
+            <p>No restaurants & bars found. Try a different search.</p>
         {% endif %}
     </section>
 
     <section class="tips mt-4">
-        <h3>Latest Restaurant Tips</h3>
+        <h3>Latest Restaurant & Bars Tips</h3>
         <div class="row">
         {% for tip in tips %}
             <div class="col-md-4 mb-3">
@@ -86,4 +86,4 @@
         {% endfor %}
         </div>
     </section>
-{% endblock %}
+ {% endblock %}

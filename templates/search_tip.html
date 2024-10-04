@@ -1,53 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}Search Restaurants{% endblock %}
+{% block title %}Search Restaurants & Bars{% endblock %}
 
 {% block content %}
-    <section class="search-form">
-        <h2>Search for Restaurants</h2>
+    <section class="searchform">
+        <h2>Search for Restaurants & Bars</h2>
         <form method="POST" action="{{ url_for('search_tip') }}">
             {{ form.hidden_tag() }}
-            <div class="form-group">
+            <div class="formgroup">
                 {{ form.search_query.label }}
-                {{ form.search_query(class="form-control") }}
+                {{ form.search_query(class="formcontrol") }}
             </div>
-            <div class="form-group">
+            <div class="formgroup">
                 {{ form.cuisine.label }}
-                {{ form.cuisine(class="form-control") }}
+                {{ form.cuisine(class="formcontrol") }}
             </div>
-            <div class="form-group">
+            <div class="formgroup">
                 {{ form.price_range.label }}
-                {{ form.price_range(class="form-control") }}
+                {{ form.price_range(class="formcontrol") }}
             </div>
-            <div class="form-group">
+            <div class="formgroup">
                 {{ form.rating.label }}
-                {{ form.rating(class="form-control") }}
+                {{ form.rating(class="formcontrol") }}
             </div>
-            <div class="form-group">
+            <div class="formgroup">
                 {{ form.location.label }}
-                {{ form.location(class="form-control") }}
+                {{ form.location(class="formcontrol") }}
             </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-primary") }}
+            <div class="formgroup">
+                {{ form.submit(class="btn btnprimary") }}
             </div>
         </form>
     </section>
 
-    <section class="search-results">
+    <section class="searchresults">
         <h2>Search Results</h2>
         {% if search_results %}
             {% for business in search_results %}
-                <article class="restaurant">
+                <article class="restaurantbar">
                     <h3>{{ business.name }}</h3>
                     <p><strong>Address:</strong> {{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
                     <p><strong>Rating:</strong> {{ business.rating }}</p>
                     <p><strong>Price Level:</strong> {{ business.price }}</p>
                     <p><strong>Cuisine:</strong> {{ ', '.join(business.categories|map(attribute='title')) }}</p>
-                    <a href="{{ business.url }}" target="_blank">Open this Restaurant</a>
+                    <a href="{{ business.url }}" target="_blank">Open this Restaurant & Bar</a>
                 </article>
             {% endfor %}
         {% else %}
             <p>No results found. Try adjusting your search criteria.</p>
         {% endif %}
     </section>
-{% endblock %}
