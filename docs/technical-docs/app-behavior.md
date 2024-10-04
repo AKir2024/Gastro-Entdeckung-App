@@ -16,7 +16,7 @@ nav_order: 2
 -	Ein Logout-Mechanismus ermöglicht es den Benutzern, sich sicher aus der App abzumelden.
 
 ## 2.	Restaurant-Tipps hinzufügen:
--	Angemeldete Benutzer können neue Restaurant-Tipps hinzufügen. Diese Informationen beinhalten wahrscheinlich Angaben zu Restaurants und eventuell persönliche Bewertungen oder Empfehlungen (Tipps).
+-	Angemeldete Benutzer können neue Restaurant-Tipps hinzufügen. Diese Informationen beinhalten Angaben zu Restaurants und eventuell persönliche Bewertungen oder Empfehlungen (Tipps).
 -	Es gibt eine Funktion, um eine Restaurantbewertung oder einen Tipp in die Datenbank hinzuzufügen.
 
 ## 3.	Homepage mit Tipps anzeigen:
